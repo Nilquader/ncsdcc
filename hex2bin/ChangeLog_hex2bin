@@ -1,0 +1,29 @@
+- Hex2bin 1.0.6 - 20080103 - Jacques Pelletier
+	Fixed a bug when generating binary files near the end of the buffer
+	
+- Hex2bin 1.0.5	- 20071005 - Paweł Grabski -
+	Improved parsing of options.
+
+- Hex2bin 1.0.4	- 20050126 - Jacques Pelletier -
+	Corrected the conversion LF -> CR+LF bug
+	applied patch for correcting the incorrect handling of 
+	extended segment address record
+	added the Rockwell checksum extensions, and modified them a bit to allow
+	other types later.
+	
+- Hex2bin 1.0.3	- 20040617 - Alf Lacis -
+	Added pad byte (may not always want FF).
+	Added 'break;' to remove GNU compiler warning about label at
+	end of compound statement
+	Added PROGRAM & VERSION strings.
+
+- Hex2bin 1.0.2	-
+	Corrected Bug in checksum verification
+
+- Hex2bin 1.0.1 -
+	Added checking for memory indexing out of bound.
+	Added segmented and linear extended addressing in hex2bin.
+	Corrected an error: & were interverted with && (and bitwise, logical and).
+
+- Hex2bin 1.0.0 -
+    Initial release

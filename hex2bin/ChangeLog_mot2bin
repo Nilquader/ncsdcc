@@ -1,0 +1,24 @@
+- mot2bin 1.0.6	- 20080103 - Jacques Pelletier
+	Corrected a bug when generating a binary file near the end of the buffer.
+
+- mot2bin 1.0.5	- 20071005 - Paweł Grabski -
+	Improved parsing of options (same code as hex2bin).
+
+- mot2bin 1.0.4 - 20050128 - Jacques Pelletier -
+	Modified the checksum code to be able to generate other checksum types
+	later (ex. CRC).
+
+- mot2bin 1.0.3 - 20041026 - Scott A. Mintz -
+	Modified the MOT2BIN file to compute a checksum over a range using
+	8bit, 16bit little endian, or 16bit big endian and optionally forcing
+	the checksum to a specific value by modifying a memory location.
+	
+- mot2bin 1.0.2 - 20040617 - Alf Lacis -
+	Added pad byte (may not always want FF).
+	Added initialisation to Checksum to remove GNU
+	compiler warning about possible uninitialised usage
+	Added 2x'break;' to remove GNU compiler warning about label at
+	end of compound statement
+	Added PROGRAM & VERSION strings.
+
+- no previous ChangeLog -
