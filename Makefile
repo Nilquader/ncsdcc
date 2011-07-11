@@ -27,15 +27,18 @@ clean:
 	rm -f *.map
 	rm -f *.lnk
 	rm -f *.sym
-	
+	rm -f *.lst
+	rm -f *.noi
+	rm -f *~
+
 test.card: card.bin nc100.card
 	$(SNAP) test.card -h 512 -i nc100.card -l card.bin 0000
 
 nc100.card:
 	dd bs=1024 count=1024 if=/dev/zero of=nc100.card
 
-card.bin: crt0.rel putchar.rel getchar.rel nc100.lib hello.rel
-	$(SDCC) -mz80 -o card -l nc100.lib --code-loc 0xC300 --data-loc 0xF000 --no-std-crt0 ./crt0.rel ./putchar.rel getchar.rel hello.rel
+card.bin: crt0.rel putchar.rel getchar.rel libnc100/nc100.lib hello.rel
+	$(SDCC) -mz80 -o card -l libnc100/nc100.lib --code-loc 0xC300 --data-loc 0xF000 --no-std-crt0 ./crt0.rel ./putchar.rel getchar.rel hello.rel
 	$(LINK) -f card.lnk
 	$(HEX2BIN) -p 0x00 card.ihx
 
@@ -48,11 +51,8 @@ putchar.rel: putchar.s
 getchar.rel: getchar.s
 	$(AS) -o getchar.rel getchar.s
 
-nc100.rel: nc100.s
-	$(AS) -o nc100.rel nc100.s
-nc100.lib: nc100.rel
-	$(AR) -Sq nc100.lib nc100.rel
-	$(ASR) nc100.lib
+libnc100/nc100.lib:
+	cd libnc100 && $(MAKE)
 
 hello.rel: hello.c
 	$(SDCC) -mz80 -c hello.c
