@@ -2,7 +2,7 @@
  * Amstrad NC100 Firmware Libray for SDCC       
  * (c) 2011 by Nilquader of SPRING
  *
- * nc100.h - Version 0.1
+ * firmware.h - Version 0.1
  *
  */
  
@@ -18,6 +18,7 @@
 #define EDITBUF_FORCE 32
 #define EDITBUF_DOTTY 64
 
+// Firmware fixed memory locations 
 volatile __at(0xb000) unsigned char copyofmmu0;
 volatile __at(0xb001) unsigned char copyofmmu1;
 volatile __at(0xb002) unsigned char copyofmmu2;
@@ -54,10 +55,21 @@ volatile __at(0xb08b) unsigned char diagnostics;
 volatile __at(0xb08c) unsigned char saveprinstat;
 volatile __at(0xb08d) unsigned char kbdstate1[10];
 volatile __at(0xb097) unsigned char kbdstate2[10];
+volatile __at(0xb0a1) unsigned char padkeybuf[64];
+volatile __at(0xb0e1) unsigned char padnextin;
+volatile __at(0xb0e1) unsigned char padnextout;
+volatile __at(0xb0e3) unsigned char padbufempty;
+volatile __at(0xb0e4) unsigned int lastkbdstate;
+volatile __at(0xb0e6) unsigned int thiskbdstate;
+volatile __at(0xb0e8) unsigned char capsstate;
+volatile __at(0xb0e9) unsigned char savecaps;
+volatile __at(0xb0ea) unsigned char justswitchedon;
+
 /* todo: some missing firmware variables */
 volatile __at(0xb150) unsigned char d_datebuf[18];
 volatile __at(0xb162) unsigned char d_asciitime[12];
 /* todo: some missing firmware variables */
+
 
 
 /* line editor with options. Returns FALSE if ESC pressed  */ 
@@ -66,7 +78,7 @@ char editbuf(char* inputbuf, unsigned char size, char flags);
 /* moves the cursor */
 void txtsetcursor(char column, char row);
 
-/* enable or diable various display attributes */
+/* enable or disable various display attributes */
 void txtboldoff(void);
 void txtboldon(void);
 void txtinverseoff(void);

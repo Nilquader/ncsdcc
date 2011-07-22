@@ -1,0 +1,17 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 1.
+
+
+
+                              1 ; void txtinverseoff(void);
+   0000                       2 _txtinverseoff::
+   0000 C3 45 B8              3 	jp 0xb845 ; txtinverseoff
+ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 2.
+
+Symbol Table
+
+    .__.ABS.=  0000 G   |   0 _txtinve   0000 GR
+ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 3.
+
+Area Table
+
+   0 _CODE      size    3   flags 0

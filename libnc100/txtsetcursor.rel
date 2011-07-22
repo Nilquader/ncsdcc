@@ -1,0 +1,9 @@
+XL
+H 1 areas 2 global symbols
+S .__.ABS. Def0000
+A _CODE size C flags 0 addr 0
+S _txtsetcursor Def0000
+T 00 00
+R 00 00 00 00
+T 00 00 21 02 00 39 5E 23 56 63 6A C3 36 B8
+R 00 00 00 00

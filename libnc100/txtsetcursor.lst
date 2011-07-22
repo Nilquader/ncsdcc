@@ -1,0 +1,24 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 1.
+
+
+
+                              1 ; void txtsetcursor(char column, char row);
+   0000                       2 _txtsetcursor::
+   0000 21 02 00              3 	ld hl,#2
+   0003 39                    4 	add hl,sp
+   0004 5E                    5 	ld e,(hl)
+   0005 23                    6 	inc hl
+   0006 56                    7 	ld d,(hl)
+   0007 63                    8 	ld h,e
+   0008 6A                    9 	ld l,d
+   0009 C3 36 B8             10 	jp 0xb836 ; txtsetcursor
+ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 2.
+
+Symbol Table
+
+    .__.ABS.=  0000 G   |   0 _txtsetc   0000 GR
+ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 3.
+
+Area Table
+
+   0 _CODE      size    C   flags 0

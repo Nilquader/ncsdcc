@@ -1,0 +1,76 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 1.
+
+Symbol Table
+
+    .__.ABS.                                                    =  0000 G
+    _MMU0                                                       =  0010 
+    _MMU1                                                       =  0011 
+    _SNDCHAH                                                    =  0051 
+    _SNDCHAL                                                    =  0050 
+    ___saveaf                                                   =  B006 G
+    ___savehl                                                   =  B008 G
+    ___savepearlmmu                                             =  B005 G
+  0 __str_0                                                        00A6 R
+  0 __str_1                                                        00B8 R
+  0 __str_2                                                        00DC R
+  0 __str_3                                                        0108 R
+  0 __str_4                                                        0120 R
+  0 __str_5                                                        0132 R
+  0 __str_6                                                        0147 R
+    _copyofmmu0                                                 =  B000 G
+    _copyofmmu1                                                 =  B001 G
+    _copyofmmu2                                                 =  B002 G
+    _copyofmmu3                                                 =  B003 G
+    _criticalpc                                                 =  B037 G
+    _criticalsp                                                 =  B039 G
+    _d_asciitime                                                =  B162 G
+    _d_datebuf                                                  =  B150 G
+    _diagnostics                                                =  B08B G
+    _editbuf                                                       **** GX
+    _getchar                                                       **** GX
+    _gotcontext                                                 =  B004 G
+    _initstack                                                  =  B03B G
+    _kbdstate1                                                  =  B08D G
+    _kbdstate2                                                  =  B097 G
+  0 _main                                                          0000 GR
+  0 _main_end                                                      00A6 GR
+  0 _main_start                                                    0000 GR
+    _nmichksums                                                 =  B02F G
+    _nmimagic                                                   =  B02B G
+    _padgetversion                                                 **** GX
+    _printf                                                        **** GX
+    _saveaf                                                     =  B00A G
+    _saveafdash                                                 =  B01A G
+    _savebc                                                     =  B00C G
+    _savebcdash                                                 =  B01C G
+    _savecritpc                                                 =  B026 G
+    _savecritsp                                                 =  B028 G
+    _savede                                                     =  B00E G
+    _savededash                                                 =  B01E G
+    _savehl                                                     =  B010 G
+    _savehldash                                                 =  B020 G
+    _saveix                                                     =  B012 G
+    _saveiy                                                     =  B014 G
+    _savemmu0                                                   =  B022 G
+    _savemmu1                                                   =  B023 G
+    _savemmu2                                                   =  B024 G
+    _savemmu3                                                   =  B025 G
+    _savepc                                                     =  B016 G
+    _saveprinstat                                               =  B08C G
+    _savesp                                                     =  B018 G
+    _savingcontext                                              =  B02A G
+    _txtboldoff                                                    **** GX
+    _txtboldon                                                     **** GX
+    _txtsetcursor                                                  **** GX
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 2.
+
+Area Table
+
+   0 _CODE                                      size  15E   flags 0
+   1 _DATA                                      size    0   flags 0
+   2 _OVERLAY                                   size    0   flags 0
+   3 _HOME                                      size    0   flags 0
+   4 _GSINIT                                    size    0   flags 0
+   5 _GSFINAL                                   size    0   flags 0
+   6 _CABS                                      size    0   flags 0

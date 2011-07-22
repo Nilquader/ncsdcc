@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.0.0 #6037 (Jul 10 2011) (Mac OS X x86_64)
-; This file was generated Mon Jul 11 23:53:28 2011
+; This file was generated Fri Jul 22 19:30:43 2011
 ;--------------------------------------------------------
 	.module hello
 	.optsdcc -mz80
@@ -12,6 +12,14 @@
 	.globl _main
 	.globl _d_asciitime
 	.globl _d_datebuf
+	.globl _kbdstate2
+	.globl _kbdstate1
+	.globl _saveprinstat
+	.globl _diagnostics
+	.globl _initstack
+	.globl _criticalsp
+	.globl _criticalpc
+	.globl _nmichksums
 	.globl _nmimagic
 	.globl _savingcontext
 	.globl _savecritsp
@@ -43,6 +51,10 @@
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
+_MMU0	=	0x0010
+_MMU1	=	0x0011
+_SNDCHAL	=	0x0050
+_SNDCHAH	=	0x0051
 ;--------------------------------------------------------
 ;  ram data
 ;--------------------------------------------------------
@@ -75,6 +87,14 @@ _savecritpc	=	0xb026
 _savecritsp	=	0xb028
 _savingcontext	=	0xb02a
 _nmimagic	=	0xb02b
+_nmichksums	=	0xb02f
+_criticalpc	=	0xb037
+_criticalsp	=	0xb039
+_initstack	=	0xb03b
+_diagnostics	=	0xb08b
+_saveprinstat	=	0xb08c
+_kbdstate1	=	0xb08d
+_kbdstate2	=	0xb097
 _d_datebuf	=	0xb150
 _d_asciitime	=	0xb162
 ;--------------------------------------------------------
@@ -100,7 +120,7 @@ _d_asciitime	=	0xb162
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;hello.c:9: int main(void)
+;hello.c:10: int main(void)
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
@@ -112,19 +132,25 @@ _main:
 	ld	hl,#-22
 	add	hl,sp
 	ld	sp,hl
-;hello.c:14: eingabe[0] = 0; 
+;hello.c:15: eingabe[0] = 0; 
 	ld	hl,#0x0000
 	add	hl,sp
 	ld	c,l
 	ld	b,h
 	ld	(hl),#0x00
-;hello.c:15: firmver=padgetversion();
+;hello.c:16: firmver=padgetversion();
 	push	bc
 	call	_padgetversion
 	pop	bc
 	ld	-2 (ix),l
 	ld	-1 (ix),h
-;hello.c:17: printf("Current Time: %s\n", d_asciitime);
+;hello.c:18: SNDCHAL = 50;
+	ld	a,#0x32
+	out	(_SNDCHAL),a
+;hello.c:19: SNDCHAH = 30;
+	ld	a,#0x1E
+	out	(_SNDCHAH),a
+;hello.c:21: printf("Current Time: %s\n", d_asciitime);
 	push	bc
 	ld	hl,#_d_asciitime
 	push	hl
@@ -135,7 +161,7 @@ _main:
 	ld	hl,#0x0101
 	ex	(sp),hl
 	call	_txtsetcursor
-	ld	hl,#0x0025
+	ld	hl,#0x0026
 	ex	(sp),hl
 	ld	hl,#__str_1
 	push	hl
@@ -144,7 +170,7 @@ _main:
 	pop	af
 	call	_txtboldon
 	pop	bc
-;hello.c:21: printf("Your firmware version is: %i, mmu0 is %02X\n", firmver,copyofmmu0);
+;hello.c:25: printf("Your firmware version is: %i, mmu0 is %02X\n", firmver,copyofmmu0);
 	ld	hl,#_copyofmmu0 + 0
 	ld	e,(hl)
 	ld	d,#0x00
@@ -165,7 +191,7 @@ _main:
 	call	_printf
 	pop	af
 	pop	bc
-;hello.c:24: if (editbuf(eingabe, 20, EDITBUF_DOTTY))
+;hello.c:28: if (editbuf(eingabe, 20, EDITBUF_DOTTY))
 	push	bc
 	ld	hl,#0x4014
 	push	hl
@@ -177,7 +203,7 @@ _main:
 	xor	a,a
 	or	a,l
 	jr	Z,00102$
-;hello.c:26: printf("\nYour name is %s\n", eingabe);
+;hello.c:30: printf("\nYour name is %s\n", eingabe);
 	push	bc
 	ld	hl,#__str_4
 	push	hl
@@ -186,18 +212,18 @@ _main:
 	pop	af
 	jr	00103$
 00102$:
-;hello.c:30: printf("\nOk, you're to shy!\n");
+;hello.c:34: printf("\nOk, you're to shy!\n");
 	ld	hl,#__str_5
 	push	hl
 	call	_printf
 	pop	af
 00103$:
-;hello.c:33: printf("\nPress any key to quit");
+;hello.c:37: printf("\nPress any key to quit");
 	ld	hl,#__str_6
 	push	hl
 	call	_printf
 	pop	af
-;hello.c:34: getchar();
+;hello.c:38: getchar();
 	call	_getchar
 	ld	sp,ix
 	pop	ix

@@ -1,0 +1,7 @@
+XL
+H 1 areas 2 global symbols
+S .__.ABS. Def0000
+A _CODE size 9 flags 0 addr 0
+S _getchar Def0000
+T 00 00 CD 0F B8 78 B7 20 F9 69 C9
+R 00 00 00 00

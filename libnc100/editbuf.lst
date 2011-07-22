@@ -1,0 +1,40 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 1.
+
+
+
+                              1 	.area _CODE
+                              2 ; char editbuf(char* inputbuf, unsigned char size, char flags);
+                              3 ; todo: optimize parameter fetching
+                              4 .globl _editbuf
+   0000                       5 _editbuf::
+   0000 21 02 00              6 	ld hl, #2
+   0003 39                    7 	add hl,sp
+   0004 5E                    8 	ld e,(hl)
+                              9 
+   0005 23                   10 	inc hl
+   0006 56                   11 	ld d,(hl)
+                             12 
+   0007 23                   13 	inc hl
+   0008 46                   14 	ld b,(hl)
+                             15 
+   0009 23                   16 	inc hl
+   000A 7E                   17 	ld a,(hl)
+                             18 
+   000B 62                   19 	ld h,d
+   000C 6B                   20 	ld l,e
+   000D CD 00 B8             21 	call 0xb800 ; editbuf
+   0010 2E 01                22 	ld l,#1
+   0012 D8                   23 	ret c
+   0013 2E 00                24 	ld l,#0
+   0015 C9                   25 	ret
+                             26 	
+ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 2.
+
+Symbol Table
+
+    .__.ABS.=  0000 G   |   0 _editbuf   0000 GR
+ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 3.
+
+Area Table
+
+   0 _CODE      size   16   flags 0

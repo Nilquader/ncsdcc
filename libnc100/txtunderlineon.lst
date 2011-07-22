@@ -1,0 +1,17 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 1.
+
+
+
+                              1 ; void txtunderlineon(void);
+   0000                       2 _txtunderlineon::
+   0000 C3 4E B8              3 	jp 0xb84e ; txtunderlineon
+ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 2.
+
+Symbol Table
+
+    .__.ABS.=  0000 G   |   0 _txtunde   0000 GR
+ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 3.
+
+Area Table
+
+   0 _CODE      size    3   flags 0
