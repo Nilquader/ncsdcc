@@ -3,7 +3,7 @@
 #include "libnc100/nc100.h"
 #include "libnc100/firmware.h"
 
-#define BUILD 37
+#define BUILD 38
 
 //volatile __at(0xb000) unsigned char copyofmmu0;
 
@@ -16,7 +16,7 @@ int main(void)
    firmver=padgetversion();
 
    SNDCHAL = 50;
-   SNDCHAH = 50;
+   SNDCHAH = 30;
 
    printf("Current Time: %s\n", d_asciitime);
    txtsetcursor(1,1);

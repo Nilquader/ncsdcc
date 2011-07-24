@@ -3,9 +3,7 @@
 #include "libnc100/nc100.h"
 #include "libnc100/firmware.h"
 
-#define BUILD 38
-
-//volatile __at(0xb000) unsigned char copyofmmu0;
+#define BUILD 39
 
 int main(void)
 {
@@ -18,7 +16,7 @@ int main(void)
    SNDCHAL = 50;
    SNDCHAH = 30;
 
-   printf("Current Time: %s\n", d_asciitime);
+   printf("Current Time: %s\n", dasciitime);
    txtsetcursor(1,1);
    printf("C on the Amstrad Notepad, Build %i\n", BUILD);
    txtboldon();

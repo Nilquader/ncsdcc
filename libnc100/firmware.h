@@ -18,7 +18,7 @@
 #define EDITBUF_FORCE 32
 #define EDITBUF_DOTTY 64
 
-// Firmware fixed memory locations 
+// Firmware System Variables
 volatile __at(0xb000) unsigned char copyofmmu0;
 volatile __at(0xb001) unsigned char copyofmmu1;
 volatile __at(0xb002) unsigned char copyofmmu2;
@@ -64,12 +64,46 @@ volatile __at(0xb0e6) unsigned int thiskbdstate;
 volatile __at(0xb0e8) unsigned char capsstate;
 volatile __at(0xb0e9) unsigned char savecaps;
 volatile __at(0xb0ea) unsigned char justswitchedon;
+// variables above here are preserved after timeout
 
+volatile __at(0xb0eb) unsigned char padserbuf[64];
+volatile __at(0xb10b) unsigned char padsernextin;
+volatile __at(0xb10c) unsigned char padsernextout;
+volatile __at(0xb10d) unsigned char padserbufempty;
+volatile __at(0xb10e) unsigned char padserin_xoff; // non-zero when XOFF has stopped inward transmission
+volatile __at(0xb10f) unsigned char padserout_xoff; // non-zero when XOFF has stopped outward transmission
+volatile __at(0xb110) unsigned char disablexonxoff; //  non-zero to disable software handshake
+volatile __at(0xb111) unsigned char ackirq; // set non-zero when ACK interrupt occurs
+volatile __at(0xb112) unsigned char rptdelay; // centisecs
+volatile __at(0xb113) unsigned char rptrate;  //centisecs
+volatile __at(0xb114) unsigned char rpttimer; // count down timer for key repeat
+volatile __at(0xb115) unsigned char keytorepeat; // key number
+volatile __at(0xb116) unsigned char rptkeystates; // shift states
+volatile __at(0xb117) unsigned char rtcbuf[13];
+volatile __at(0xb124) unsigned char dalarmday[6]; // alarm day,hour,min ready for rtc chip
+volatile __at(0xb12a) unsigned char alarmhappened; // non zero when alarm has gone off, message pending
+volatile __at(0xb12b) unsigned char alarmhappenedgotmsg; // non zero when alarm has gone off, got message & pending
+volatile __at(0xb12c) unsigned char soundcounter; // non-zero if we're playing a tune
+volatile __at(0xb12d) void* soundptr; // pointer to array of frequency,duration
+volatile __at(0xb12f) unsigned char soundrepcount;
+volatile __at(0xb130) void* soundrepptr;
+volatile __at(0xb132) unsigned char poweroffminutes; // configured time to power off
+volatile __at(0xb133) unsigned char minutesleft;
+volatile __at(0xb134) unsigned int minutecounter;
+volatile __at(0xb136) unsigned char eventhappened;
+volatile __at(0xb137) unsigned char preservecontext; // 0=return to main screen at power on
+volatile __at(0xb138) unsigned char dontpreservecontext; // 1=dont preserve (diag/batt)
+volatile __at(0xb139) unsigned char mainprog; // 6=inbasic, 128=inexternal (foreground program id)
+volatile __at(0xb13a) unsigned char currentprinter; // 0 for parallel, 1 for serial
+volatile __at(0xb13b) void* currentmenu; // pointer to current menu
+volatile __at(0xb13d) unsigned char wasmenusel;
+volatile __at(0xb13e) unsigned char lastsecond; // checked to see whether to update the time
+volatile __at(0xb13f) unsigned char clockon; // uses in Protext, non-zero when clock is enabled
+volatile __at(0xb140) char sdumpname[4]; // for screen dump name
+volatile __at(0xb148) unsigned char dworkspace[8]; // for massaged copy of symbol data (eg inverse/underline)
+volatile __at(0xb150) char ddatebuf[18];
+volatile __at(0xb162) char dasciitime[12];
 /* todo: some missing firmware variables */
-volatile __at(0xb150) unsigned char d_datebuf[18];
-volatile __at(0xb162) unsigned char d_asciitime[12];
-/* todo: some missing firmware variables */
-
 
 
 /* line editor with options. Returns FALSE if ESC pressed  */ 

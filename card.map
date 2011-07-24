@@ -70,8 +70,45 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
             B08C  _saveprinstat                    
             B08D  _kbdstate1                       
             B097  _kbdstate2                       
-            B150  _d_datebuf                       
-            B162  _d_asciitime                     
+            B0A1  _padkeybuf                       
+            B0E1  _padnextin                       
+            B0E1  _padnextout                      
+            B0E3  _padbufempty                     
+            B0E4  _lastkbdstate                    
+            B0E6  _thiskbdstate                    
+            B0E8  _capsstate                       
+            B0E9  _savecaps                        
+            B0EA  _justswitchedon                  
+            B0EB  _padserbuf                       
+            B10B  _padsernextin                    
+            B10C  _padsernextout                   
+            B10D  _padserbufempty                  
+            B10E  _padserin_xoff                   
+            B10F  _padserout_xoff                  
+            B110  _disablexonxoff                  
+            B111  _ackirq                          
+            B112  _rptdelay                        
+            B113  _rptrate                         
+            B114  _rpttimer                        
+            B115  _keytorepeat                     
+            B116  _rptkeystates                    
+            B117  _rtcbuf                          
+            B124  _dalarmday                       
+            B12A  _alarmhappened                   
+            B12B  _alarmhappenedgotmsg             
+            B12C  _soundcounter                    
+            B12D  _soundptr                        
+            B12F  _soundrepcount                   
+            B130  _soundrepptr                     
+            B132  _poweroffminutes                 
+            B133  _minutesleft                     
+            B134  _minutecounter                   
+            B136  _eventhappened                   
+            B137  _preservecontext                 
+            B138  _dontpreservecontext             
+            B148  _dworkspace                      
+            B150  _ddatebuf                        
+            B162  _dasciitime                      
             C300  s__CODE                          
             D0A9  s__GSFINAL                       
             D0A9  s__GSINIT                        
@@ -80,9 +117,18 @@ Area                               Addr   Size   Decimal Bytes (Attributes)
             F000  s__CABS                          
             F000  s__DATA                          
             F000  s__HEAP                          
+ASxxxx Linker V02.00 + NoICE + sdld,  page 3.
+Hexadecimal
+
+Area                               Addr   Size   Decimal Bytes (Attributes)
+--------------------------------   ----   ----   ------- ----- ------------
+.	.ABS.                            0000   0000 =      0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  ---------------------------------   ------------------------
             F000  s__OVERLAY                       
 
-ASxxxx Linker V02.00 + NoICE + sdld,  page 3.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 4.
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
@@ -119,7 +165,7 @@ _CODE                              C300   0DA9 =   3497. bytes (REL,CON)
             D078  __rrslong_rrx_s                  
             D092  __rlslong_rrx_s                  
             D092  __rlulong_rrx_s                  
-ASxxxx Linker V02.00 + NoICE + sdld,  page 4.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 5.
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
@@ -128,7 +174,7 @@ _HEADER                            0000   0000 =      0. bytes (ABS,CON)
 
       Value  Global                              Global Defined In Module
       -----  ---------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 5.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 6.
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
@@ -137,7 +183,7 @@ _HEADER0                           0000   0008 =      8. bytes (ABS,CON)
 
       Value  Global                              Global Defined In Module
       -----  ---------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 6.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 7.
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
@@ -146,7 +192,7 @@ _HEADER1                           0000   000B =     11. bytes (ABS,CON)
 
       Value  Global                              Global Defined In Module
       -----  ---------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 7.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 8.
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
@@ -155,7 +201,7 @@ _HEADER2                           0000   0009 =      9. bytes (ABS,CON)
 
       Value  Global                              Global Defined In Module
       -----  ---------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 8.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 9.
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
@@ -164,7 +210,7 @@ _HOME                              D0A9   0000 =      0. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  ---------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 9.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 10.
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
@@ -175,7 +221,7 @@ _GSINIT                            D0A9   0000 =      0. bytes (REL,CON)
       -----  ---------------------------------   ------------------------
             D0A9  gsinit                           
 
-ASxxxx Linker V02.00 + NoICE + sdld,  page 10.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 11.
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
@@ -184,7 +230,7 @@ _GSFINAL                           D0A9   0001 =      1. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  ---------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 11.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 12.
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
@@ -193,7 +239,7 @@ _DATA                              F000   0000 =      0. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  ---------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 12.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 13.
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
@@ -202,7 +248,7 @@ _BSS                               F000   0000 =      0. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  ---------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 13.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 14.
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
@@ -211,7 +257,7 @@ _HEAP                              F000   0000 =      0. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  ---------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 14.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 15.
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
@@ -220,7 +266,7 @@ _OVERLAY                           F000   0000 =      0. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  ---------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 15.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 16.
 Hexadecimal
 
 Area                               Addr   Size   Decimal Bytes (Attributes)
@@ -229,7 +275,7 @@ _CABS                              F000   0000 =      0. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  ---------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 16.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 17.
 
 Files Linked                              [ module(s) ]
 
@@ -251,7 +297,7 @@ libnc100/nc100.lib                        [ txtboldon.rel ]
 /usr/local/bin/../share/sdcc/lib/z80/z80  [ strlen.rel ]
 /usr/local/bin/../share/sdcc/lib/z80/z80  [ shift.rel ]
 
-ASxxxx Linker V02.00 + NoICE + sdld,  page 17.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 18.
 
 User Base Address Definitions
 

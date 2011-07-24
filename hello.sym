@@ -3,10 +3,47 @@
 Symbol Table
 
     .__.ABS.                                                    =  0000 G
+    _BRCTRL                                                     =  0030 
+    _IRQMASK                                                    =  0060 
+    _IRQSTA                                                     =  0090 
+    _KBDROW0                                                    =  00B0 
+    _KBDROW1                                                    =  00B1 
+    _KBDROW2                                                    =  00B2 
+    _KBDROW3                                                    =  00B3 
+    _KBDROW4                                                    =  00B4 
+    _KBDROW5                                                    =  00B5 
+    _KBDROW6                                                    =  00B6 
+    _KBDROW7                                                    =  00B7 
+    _KBDROW8                                                    =  00B8 
+    _KBDROW9                                                    =  00B9 
+    _MCSTAT                                                     =  00A0 
+    _MCWAIT                                                     =  0020 
     _MMU0                                                       =  0010 
     _MMU1                                                       =  0011 
+    _MMU2                                                       =  0012 
+    _MMU3                                                       =  0013 
+    _PARPORT                                                    =  0050 
+    _PWROFF                                                     =  0070 
+    _RTC0                                                       =  00D0 
+    _RTC1                                                       =  00D1 
+    _RTC2                                                       =  00D2 
+    _RTC3                                                       =  00D3 
+    _RTC4                                                       =  00D4 
+    _RTC5                                                       =  00D5 
+    _RTC6                                                       =  00D6 
+    _RTC7                                                       =  00D7 
+    _RTC8                                                       =  00D8 
+    _RTC9                                                       =  00D9 
+    _RTCA                                                       =  00DA 
+    _RTCB                                                       =  00DB 
+    _RTCC                                                       =  00DC 
+    _RTCD                                                       =  00DD 
+    _RTCE                                                       =  00DE 
+    _RTCF                                                       =  00DF 
     _SNDCHAH                                                    =  0051 
     _SNDCHAL                                                    =  0050 
+    _UARTDR                                                     =  00C0 
+    _UARTSR                                                     =  00C1 
     ___saveaf                                                   =  B006 G
     ___savehl                                                   =  B008 G
     ___savepearlmmu                                             =  B005 G
@@ -17,32 +54,64 @@ Symbol Table
   0 __str_4                                                        0120 R
   0 __str_5                                                        0132 R
   0 __str_6                                                        0147 R
+    _ackirq                                                     =  B111 G
+    _alarmhappened                                              =  B12A G
+    _alarmhappenedgotmsg                                        =  B12B G
+    _capsstate                                                  =  B0E8 G
     _copyofmmu0                                                 =  B000 G
     _copyofmmu1                                                 =  B001 G
     _copyofmmu2                                                 =  B002 G
     _copyofmmu3                                                 =  B003 G
     _criticalpc                                                 =  B037 G
     _criticalsp                                                 =  B039 G
-    _d_asciitime                                                =  B162 G
-    _d_datebuf                                                  =  B150 G
+    _dalarmday                                                  =  B124 G
+    _dasciitime                                                 =  B162 G
+    _ddatebuf                                                   =  B150 G
     _diagnostics                                                =  B08B G
+    _disablexonxoff                                             =  B110 G
+    _dontpreservecontext                                        =  B138 G
+    _dworkspace                                                 =  B148 G
     _editbuf                                                       **** GX
+    _eventhappened                                              =  B136 G
     _getchar                                                       **** GX
     _gotcontext                                                 =  B004 G
     _initstack                                                  =  B03B G
+    _justswitchedon                                             =  B0EA G
     _kbdstate1                                                  =  B08D G
     _kbdstate2                                                  =  B097 G
+    _keytorepeat                                                =  B115 G
+    _lastkbdstate                                               =  B0E4 G
   0 _main                                                          0000 GR
   0 _main_end                                                      00A6 GR
   0 _main_start                                                    0000 GR
+    _minutecounter                                              =  B134 G
+    _minutesleft                                                =  B133 G
     _nmichksums                                                 =  B02F G
     _nmimagic                                                   =  B02B G
+    _padbufempty                                                =  B0E3 G
     _padgetversion                                                 **** GX
+    _padkeybuf                                                  =  B0A1 G
+    _padnextin                                                  =  B0E1 G
+    _padnextout                                                 =  B0E1 G
+    _padserbuf                                                  =  B0EB G
+    _padserbufempty                                             =  B10D G
+    _padserin_xoff                                              =  B10E G
+    _padsernextin                                               =  B10B G
+    _padsernextout                                              =  B10C G
+    _padserout_xoff                                             =  B10F G
+    _poweroffminutes                                            =  B132 G
+    _preservecontext                                            =  B137 G
     _printf                                                        **** GX
+    _rptdelay                                                   =  B112 G
+    _rptkeystates                                               =  B116 G
+    _rptrate                                                    =  B113 G
+    _rpttimer                                                   =  B114 G
+    _rtcbuf                                                     =  B117 G
     _saveaf                                                     =  B00A G
     _saveafdash                                                 =  B01A G
     _savebc                                                     =  B00C G
     _savebcdash                                                 =  B01C G
+    _savecaps                                                   =  B0E9 G
     _savecritpc                                                 =  B026 G
     _savecritsp                                                 =  B028 G
     _savede                                                     =  B00E G
@@ -59,6 +128,11 @@ Symbol Table
     _saveprinstat                                               =  B08C G
     _savesp                                                     =  B018 G
     _savingcontext                                              =  B02A G
+    _soundcounter                                               =  B12C G
+    _soundptr                                                   =  B12D G
+    _soundrepcount                                              =  B12F G
+    _soundrepptr                                                =  B130 G
+    _thiskbdstate                                               =  B0E6 G
     _txtboldoff                                                    **** GX
     _txtboldon                                                     **** GX
     _txtsetcursor                                                  **** GX
