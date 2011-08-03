@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.0.0 #6037 (Jul 10 2011) (Mac OS X x86_64)
-; This file was generated Sun Jul 24 17:52:44 2011
+; This file was generated Wed Aug  3 20:41:49 2011
 ;--------------------------------------------------------
 	.module hello
 	.optsdcc -mz80
@@ -10,9 +10,19 @@
 ; Public variables in this module
 ;--------------------------------------------------------
 	.globl _main
+	.globl _gpos
+	.globl _ghoutfile
+	.globl _goutstream
 	.globl _dasciitime
 	.globl _ddatebuf
 	.globl _dworkspace
+	.globl _sdumpname
+	.globl _clockon
+	.globl _lastsecond
+	.globl _wasmenusel
+	.globl _currentmenu
+	.globl _currentprinter
+	.globl _mainprog
 	.globl _dontpreservecontext
 	.globl _preservecontext
 	.globl _eventhappened
@@ -205,9 +215,19 @@ _minutecounter	=	0xb134
 _eventhappened	=	0xb136
 _preservecontext	=	0xb137
 _dontpreservecontext	=	0xb138
+_mainprog	=	0xb139
+_currentprinter	=	0xb13a
+_currentmenu	=	0xb13b
+_wasmenusel	=	0xb13d
+_lastsecond	=	0xb13e
+_clockon	=	0xb13f
+_sdumpname	=	0xb140
 _dworkspace	=	0xb148
 _ddatebuf	=	0xb150
 _dasciitime	=	0xb162
+_goutstream	=	0xb1ba
+_ghoutfile	=	0xb1bb
+_gpos	=	0xb1bd
 ;--------------------------------------------------------
 ; overlayable items in  ram 
 ;--------------------------------------------------------
@@ -300,9 +320,12 @@ _main:
 	ld	hl,#__str_3
 	push	hl
 	call	_printf
+	ld	hl,#0x0041
+	ex	(sp),hl
+	call	_kmcharreturn
 	pop	af
 	pop	bc
-;hello.c:26: if (editbuf(eingabe, 20, EDITBUF_DOTTY))
+;hello.c:27: if (editbuf(eingabe, 20, EDITBUF_DOTTY))
 	push	bc
 	ld	hl,#0x4014
 	push	hl
@@ -314,7 +337,7 @@ _main:
 	xor	a,a
 	or	a,l
 	jr	Z,00102$
-;hello.c:28: printf("\nYour name is %s\n", eingabe);
+;hello.c:29: printf("\nYour name is %s\n", eingabe);
 	push	bc
 	ld	hl,#__str_4
 	push	hl
@@ -323,18 +346,18 @@ _main:
 	pop	af
 	jr	00103$
 00102$:
-;hello.c:32: printf("\nOk, you're to shy!\n");
+;hello.c:33: printf("\nOk, you're to shy!\n");
 	ld	hl,#__str_5
 	push	hl
 	call	_printf
 	pop	af
 00103$:
-;hello.c:35: printf("\nPress any key to quit");
+;hello.c:36: printf("\nPress any key to quit");
 	ld	hl,#__str_6
 	push	hl
 	call	_printf
 	pop	af
-;hello.c:36: getchar();
+;hello.c:37: getchar();
 	call	_getchar
 	ld	sp,ix
 	pop	ix

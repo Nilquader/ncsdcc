@@ -1,0 +1,23 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 1.
+
+
+
+                              1 ; void kmcharreturn(unsigned int token);
+   0000                       2 _kmcharreturn::
+   0000 21 02 00              3 	ld hl, #2
+   0003 39                    4 	add hl,sp
+   0004 4E                    5 	ld c,(hl)
+   0005 23                    6 	inc hl
+   0006 46                    7 	ld b,(hl)
+                              8 
+   0007 C3 03 B8              9 	jp 0xB803 ; kmcharreturn 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 2.
+
+Symbol Table
+
+    .__.ABS.=  0000 G   |   0 _kmcharr   0000 GR
+ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 3.
+
+Area Table
+
+   0 _CODE      size    A   flags 0

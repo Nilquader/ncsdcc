@@ -103,23 +103,11 @@ volatile __at(0xb140) char sdumpname[4]; // for screen dump name
 volatile __at(0xb148) unsigned char dworkspace[8]; // for massaged copy of symbol data (eg inverse/underline)
 volatile __at(0xb150) char ddatebuf[18];
 volatile __at(0xb162) char dasciitime[12];
-/* what to do with currentcfg? */
-volatile __at(0xb1ba) unsigned char goutstream; // bit 0 for screen, 1 for printer, 2 for file
-volatile __at(0xb1bb) unsigned int ghoutfile; // file handle for charout if bit 2 set
-volatile __at(0xb1bd) unsigned char gpos; // current column number (charout)
 /* todo: some missing firmware variables */
 
 
-/*
- * Firmware routines
- */
-
 /* line editor with options. Returns FALSE if ESC pressed  */ 
 char editbuf(char* inputbuf, unsigned char size, char flags);
-
-/* returns a token to the keyboard buffer */
-void kmcharreturn(unsigned int token);
-
 
 /* moves the cursor */
 void txtsetcursor(char column, char row);

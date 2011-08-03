@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.0.0 #6037 (Jul 10 2011) (Mac OS X x86_64)
-                              4 ; This file was generated Sun Jul 24 17:52:44 2011
+                              4 ; This file was generated Wed Aug  3 20:41:49 2011
                               5 ;--------------------------------------------------------
                               6 	.module hello
                               7 	.optsdcc -mz80
@@ -10,387 +10,410 @@
                              10 ; Public variables in this module
                              11 ;--------------------------------------------------------
                              12 	.globl _main
-                             13 	.globl _dasciitime
-                             14 	.globl _ddatebuf
-                             15 	.globl _dworkspace
-                             16 	.globl _dontpreservecontext
-                             17 	.globl _preservecontext
-                             18 	.globl _eventhappened
-                             19 	.globl _minutecounter
-                             20 	.globl _minutesleft
-                             21 	.globl _poweroffminutes
-                             22 	.globl _soundrepptr
-                             23 	.globl _soundrepcount
-                             24 	.globl _soundptr
-                             25 	.globl _soundcounter
-                             26 	.globl _alarmhappenedgotmsg
-                             27 	.globl _alarmhappened
-                             28 	.globl _dalarmday
-                             29 	.globl _rtcbuf
-                             30 	.globl _rptkeystates
-                             31 	.globl _keytorepeat
-                             32 	.globl _rpttimer
-                             33 	.globl _rptrate
-                             34 	.globl _rptdelay
-                             35 	.globl _ackirq
-                             36 	.globl _disablexonxoff
-                             37 	.globl _padserout_xoff
-                             38 	.globl _padserin_xoff
-                             39 	.globl _padserbufempty
-                             40 	.globl _padsernextout
-                             41 	.globl _padsernextin
-                             42 	.globl _padserbuf
-                             43 	.globl _justswitchedon
-                             44 	.globl _savecaps
-                             45 	.globl _capsstate
-                             46 	.globl _thiskbdstate
-                             47 	.globl _lastkbdstate
-                             48 	.globl _padbufempty
-                             49 	.globl _padnextout
-                             50 	.globl _padnextin
-                             51 	.globl _padkeybuf
-                             52 	.globl _kbdstate2
-                             53 	.globl _kbdstate1
-                             54 	.globl _saveprinstat
-                             55 	.globl _diagnostics
-                             56 	.globl _initstack
-                             57 	.globl _criticalsp
-                             58 	.globl _criticalpc
-                             59 	.globl _nmichksums
-                             60 	.globl _nmimagic
-                             61 	.globl _savingcontext
-                             62 	.globl _savecritsp
-                             63 	.globl _savecritpc
-                             64 	.globl _savemmu3
-                             65 	.globl _savemmu2
-                             66 	.globl _savemmu1
-                             67 	.globl _savemmu0
-                             68 	.globl _savehldash
-                             69 	.globl _savededash
-                             70 	.globl _savebcdash
-                             71 	.globl _saveafdash
-                             72 	.globl _savesp
-                             73 	.globl _savepc
-                             74 	.globl _saveiy
-                             75 	.globl _saveix
-                             76 	.globl _savehl
-                             77 	.globl _savede
-                             78 	.globl _savebc
-                             79 	.globl _saveaf
-                             80 	.globl ___savehl
-                             81 	.globl ___saveaf
-                             82 	.globl ___savepearlmmu
-                             83 	.globl _gotcontext
-                             84 	.globl _copyofmmu3
-                             85 	.globl _copyofmmu2
-                             86 	.globl _copyofmmu1
-                             87 	.globl _copyofmmu0
-                             88 ;--------------------------------------------------------
-                             89 ; special function registers
-                             90 ;--------------------------------------------------------
-                    0010     91 _MMU0	=	0x0010
-                    0011     92 _MMU1	=	0x0011
-                    0012     93 _MMU2	=	0x0012
-                    0013     94 _MMU3	=	0x0013
-                    0020     95 _MCWAIT	=	0x0020
-                    0030     96 _BRCTRL	=	0x0030
-                    0050     97 _PARPORT	=	0x0050
-                    0050     98 _SNDCHAL	=	0x0050
-                    0051     99 _SNDCHAH	=	0x0051
-                    0060    100 _IRQMASK	=	0x0060
-                    0070    101 _PWROFF	=	0x0070
-                    0090    102 _IRQSTA	=	0x0090
-                    00A0    103 _MCSTAT	=	0x00a0
-                    00B0    104 _KBDROW0	=	0x00b0
-                    00B1    105 _KBDROW1	=	0x00b1
-                    00B2    106 _KBDROW2	=	0x00b2
-                    00B3    107 _KBDROW3	=	0x00b3
-                    00B4    108 _KBDROW4	=	0x00b4
-                    00B5    109 _KBDROW5	=	0x00b5
-                    00B6    110 _KBDROW6	=	0x00b6
-                    00B7    111 _KBDROW7	=	0x00b7
-                    00B8    112 _KBDROW8	=	0x00b8
-                    00B9    113 _KBDROW9	=	0x00b9
-                    00C0    114 _UARTDR	=	0x00c0
-                    00C1    115 _UARTSR	=	0x00c1
-                    00D0    116 _RTC0	=	0x00d0
-                    00D1    117 _RTC1	=	0x00d1
-                    00D2    118 _RTC2	=	0x00d2
-                    00D3    119 _RTC3	=	0x00d3
-                    00D4    120 _RTC4	=	0x00d4
-                    00D5    121 _RTC5	=	0x00d5
-                    00D6    122 _RTC6	=	0x00d6
-                    00D7    123 _RTC7	=	0x00d7
-                    00D8    124 _RTC8	=	0x00d8
-                    00D9    125 _RTC9	=	0x00d9
-                    00DA    126 _RTCA	=	0x00da
-                    00DB    127 _RTCB	=	0x00db
-                    00DC    128 _RTCC	=	0x00dc
-                    00DD    129 _RTCD	=	0x00dd
-                    00DE    130 _RTCE	=	0x00de
-                    00DF    131 _RTCF	=	0x00df
-                            132 ;--------------------------------------------------------
-                            133 ;  ram data
-                            134 ;--------------------------------------------------------
-                            135 	.area _DATA
-                    B000    136 _copyofmmu0	=	0xb000
-                    B001    137 _copyofmmu1	=	0xb001
-                    B002    138 _copyofmmu2	=	0xb002
-                    B003    139 _copyofmmu3	=	0xb003
-                    B004    140 _gotcontext	=	0xb004
-                    B005    141 ___savepearlmmu	=	0xb005
-                    B006    142 ___saveaf	=	0xb006
-                    B008    143 ___savehl	=	0xb008
-                    B00A    144 _saveaf	=	0xb00a
-                    B00C    145 _savebc	=	0xb00c
-                    B00E    146 _savede	=	0xb00e
-                    B010    147 _savehl	=	0xb010
-                    B012    148 _saveix	=	0xb012
-                    B014    149 _saveiy	=	0xb014
-                    B016    150 _savepc	=	0xb016
-                    B018    151 _savesp	=	0xb018
-                    B01A    152 _saveafdash	=	0xb01a
-                    B01C    153 _savebcdash	=	0xb01c
-                    B01E    154 _savededash	=	0xb01e
-                    B020    155 _savehldash	=	0xb020
-                    B022    156 _savemmu0	=	0xb022
-                    B023    157 _savemmu1	=	0xb023
-                    B024    158 _savemmu2	=	0xb024
-                    B025    159 _savemmu3	=	0xb025
-                    B026    160 _savecritpc	=	0xb026
-                    B028    161 _savecritsp	=	0xb028
-                    B02A    162 _savingcontext	=	0xb02a
-                    B02B    163 _nmimagic	=	0xb02b
-                    B02F    164 _nmichksums	=	0xb02f
-                    B037    165 _criticalpc	=	0xb037
-                    B039    166 _criticalsp	=	0xb039
-                    B03B    167 _initstack	=	0xb03b
-                    B08B    168 _diagnostics	=	0xb08b
-                    B08C    169 _saveprinstat	=	0xb08c
-                    B08D    170 _kbdstate1	=	0xb08d
-                    B097    171 _kbdstate2	=	0xb097
-                    B0A1    172 _padkeybuf	=	0xb0a1
-                    B0E1    173 _padnextin	=	0xb0e1
-                    B0E1    174 _padnextout	=	0xb0e1
-                    B0E3    175 _padbufempty	=	0xb0e3
-                    B0E4    176 _lastkbdstate	=	0xb0e4
-                    B0E6    177 _thiskbdstate	=	0xb0e6
-                    B0E8    178 _capsstate	=	0xb0e8
-                    B0E9    179 _savecaps	=	0xb0e9
-                    B0EA    180 _justswitchedon	=	0xb0ea
-                    B0EB    181 _padserbuf	=	0xb0eb
-                    B10B    182 _padsernextin	=	0xb10b
-                    B10C    183 _padsernextout	=	0xb10c
-                    B10D    184 _padserbufempty	=	0xb10d
-                    B10E    185 _padserin_xoff	=	0xb10e
-                    B10F    186 _padserout_xoff	=	0xb10f
-                    B110    187 _disablexonxoff	=	0xb110
-                    B111    188 _ackirq	=	0xb111
-                    B112    189 _rptdelay	=	0xb112
-                    B113    190 _rptrate	=	0xb113
-                    B114    191 _rpttimer	=	0xb114
-                    B115    192 _keytorepeat	=	0xb115
-                    B116    193 _rptkeystates	=	0xb116
-                    B117    194 _rtcbuf	=	0xb117
-                    B124    195 _dalarmday	=	0xb124
-                    B12A    196 _alarmhappened	=	0xb12a
-                    B12B    197 _alarmhappenedgotmsg	=	0xb12b
-                    B12C    198 _soundcounter	=	0xb12c
-                    B12D    199 _soundptr	=	0xb12d
-                    B12F    200 _soundrepcount	=	0xb12f
-                    B130    201 _soundrepptr	=	0xb130
-                    B132    202 _poweroffminutes	=	0xb132
-                    B133    203 _minutesleft	=	0xb133
-                    B134    204 _minutecounter	=	0xb134
-                    B136    205 _eventhappened	=	0xb136
-                    B137    206 _preservecontext	=	0xb137
-                    B138    207 _dontpreservecontext	=	0xb138
-                    B148    208 _dworkspace	=	0xb148
-                    B150    209 _ddatebuf	=	0xb150
-                    B162    210 _dasciitime	=	0xb162
-                            211 ;--------------------------------------------------------
-                            212 ; overlayable items in  ram 
-                            213 ;--------------------------------------------------------
-                            214 	.area _OVERLAY
-                            215 ;--------------------------------------------------------
-                            216 ; external initialized ram data
-                            217 ;--------------------------------------------------------
-                            218 ;--------------------------------------------------------
-                            219 ; global & static initialisations
-                            220 ;--------------------------------------------------------
-                            221 	.area _HOME
-                            222 	.area _GSINIT
-                            223 	.area _GSFINAL
-                            224 	.area _GSINIT
-                            225 ;--------------------------------------------------------
-                            226 ; Home
-                            227 ;--------------------------------------------------------
-                            228 	.area _HOME
-                            229 	.area _HOME
-                            230 ;--------------------------------------------------------
-                            231 ; code
-                            232 ;--------------------------------------------------------
-                            233 	.area _CODE
-                            234 ;hello.c:8: int main(void)
-                            235 ;	---------------------------------
-                            236 ; Function main
-                            237 ; ---------------------------------
-   0000                     238 _main_start::
-   0000                     239 _main:
-   0000 DD E5               240 	push	ix
-   0002 DD 21 00 00         241 	ld	ix,#0
-   0006 DD 39               242 	add	ix,sp
-   0008 21 EA FF            243 	ld	hl,#-22
-   000B 39                  244 	add	hl,sp
-   000C F9                  245 	ld	sp,hl
-                            246 ;hello.c:13: eingabe[0] = 0; 
-   000D 21 00 00            247 	ld	hl,#0x0000
-   0010 39                  248 	add	hl,sp
-   0011 4D                  249 	ld	c,l
-   0012 44                  250 	ld	b,h
-   0013 36 00               251 	ld	(hl),#0x00
-                            252 ;hello.c:14: firmver=padgetversion();
-   0015 C5                  253 	push	bc
-   0016 CDr00s00            254 	call	_padgetversion
-   0019 C1                  255 	pop	bc
-   001A DD 75 FE            256 	ld	-2 (ix),l
-   001D DD 74 FF            257 	ld	-1 (ix),h
-                            258 ;hello.c:16: SNDCHAL = 50;
-   0020 3E 32               259 	ld	a,#0x32
-   0022 D3 50               260 	out	(_SNDCHAL),a
-                            261 ;hello.c:17: SNDCHAH = 30;
-   0024 3E 1E               262 	ld	a,#0x1E
-   0026 D3 51               263 	out	(_SNDCHAH),a
-                            264 ;hello.c:19: printf("Current Time: %s\n", dasciitime);
-   0028 C5                  265 	push	bc
-   0029 21 62 B1            266 	ld	hl,#_dasciitime
-   002C E5                  267 	push	hl
-   002D 21rA6s00            268 	ld	hl,#__str_0
-   0030 E5                  269 	push	hl
-   0031 CDr00s00            270 	call	_printf
-   0034 F1                  271 	pop	af
-   0035 21 01 01            272 	ld	hl,#0x0101
-   0038 E3                  273 	ex	(sp),hl
-   0039 CDr00s00            274 	call	_txtsetcursor
-   003C 21 27 00            275 	ld	hl,#0x0027
-   003F E3                  276 	ex	(sp),hl
-   0040 21rB8s00            277 	ld	hl,#__str_1
-   0043 E5                  278 	push	hl
-   0044 CDr00s00            279 	call	_printf
-   0047 F1                  280 	pop	af
-   0048 F1                  281 	pop	af
-   0049 CDr00s00            282 	call	_txtboldon
-   004C C1                  283 	pop	bc
-                            284 ;hello.c:23: printf("Your firmware version is: %i, mmu0 is %02X\n", firmver,copyofmmu0);
-   004D 21 00 B0            285 	ld	hl,#_copyofmmu0 + 0
-   0050 5E                  286 	ld	e,(hl)
-   0051 16 00               287 	ld	d,#0x00
-   0053 C5                  288 	push	bc
-   0054 D5                  289 	push	de
-   0055 DD 6E FE            290 	ld	l,-2 (ix)
-   0058 DD 66 FF            291 	ld	h,-1 (ix)
-   005B E5                  292 	push	hl
-   005C 21rDCs00            293 	ld	hl,#__str_2
-   005F E5                  294 	push	hl
-   0060 CDr00s00            295 	call	_printf
-   0063 F1                  296 	pop	af
-   0064 F1                  297 	pop	af
-   0065 F1                  298 	pop	af
-   0066 CDr00s00            299 	call	_txtboldoff
-   0069 21r08s01            300 	ld	hl,#__str_3
-   006C E5                  301 	push	hl
-   006D CDr00s00            302 	call	_printf
-   0070 F1                  303 	pop	af
-   0071 C1                  304 	pop	bc
-                            305 ;hello.c:26: if (editbuf(eingabe, 20, EDITBUF_DOTTY))
-   0072 C5                  306 	push	bc
-   0073 21 14 40            307 	ld	hl,#0x4014
-   0076 E5                  308 	push	hl
-   0077 C5                  309 	push	bc
-   0078 CDr00s00            310 	call	_editbuf
-   007B F1                  311 	pop	af
-   007C F1                  312 	pop	af
-   007D C1                  313 	pop	bc
-   007E AF                  314 	xor	a,a
-   007F B5                  315 	or	a,l
-   0080 28 0C               316 	jr	Z,00102$
-                            317 ;hello.c:28: printf("\nYour name is %s\n", eingabe);
-   0082 C5                  318 	push	bc
-   0083 21r20s01            319 	ld	hl,#__str_4
-   0086 E5                  320 	push	hl
-   0087 CDr00s00            321 	call	_printf
-   008A F1                  322 	pop	af
-   008B F1                  323 	pop	af
-   008C 18 08               324 	jr	00103$
-   008E                     325 00102$:
-                            326 ;hello.c:32: printf("\nOk, you're to shy!\n");
-   008E 21r32s01            327 	ld	hl,#__str_5
-   0091 E5                  328 	push	hl
-   0092 CDr00s00            329 	call	_printf
-   0095 F1                  330 	pop	af
-   0096                     331 00103$:
-                            332 ;hello.c:35: printf("\nPress any key to quit");
-   0096 21r47s01            333 	ld	hl,#__str_6
-   0099 E5                  334 	push	hl
-   009A CDr00s00            335 	call	_printf
-   009D F1                  336 	pop	af
-                            337 ;hello.c:36: getchar();
-   009E CDr00s00            338 	call	_getchar
-   00A1 DD F9               339 	ld	sp,ix
-   00A3 DD E1               340 	pop	ix
-   00A5 C9                  341 	ret
-   00A6                     342 _main_end::
-   00A6                     343 __str_0:
-   00A6 43 75 72 72 65 6E   344 	.ascii "Current Time: %s"
+                             13 	.globl _gpos
+                             14 	.globl _ghoutfile
+                             15 	.globl _goutstream
+                             16 	.globl _dasciitime
+                             17 	.globl _ddatebuf
+                             18 	.globl _dworkspace
+                             19 	.globl _sdumpname
+                             20 	.globl _clockon
+                             21 	.globl _lastsecond
+                             22 	.globl _wasmenusel
+                             23 	.globl _currentmenu
+                             24 	.globl _currentprinter
+                             25 	.globl _mainprog
+                             26 	.globl _dontpreservecontext
+                             27 	.globl _preservecontext
+                             28 	.globl _eventhappened
+                             29 	.globl _minutecounter
+                             30 	.globl _minutesleft
+                             31 	.globl _poweroffminutes
+                             32 	.globl _soundrepptr
+                             33 	.globl _soundrepcount
+                             34 	.globl _soundptr
+                             35 	.globl _soundcounter
+                             36 	.globl _alarmhappenedgotmsg
+                             37 	.globl _alarmhappened
+                             38 	.globl _dalarmday
+                             39 	.globl _rtcbuf
+                             40 	.globl _rptkeystates
+                             41 	.globl _keytorepeat
+                             42 	.globl _rpttimer
+                             43 	.globl _rptrate
+                             44 	.globl _rptdelay
+                             45 	.globl _ackirq
+                             46 	.globl _disablexonxoff
+                             47 	.globl _padserout_xoff
+                             48 	.globl _padserin_xoff
+                             49 	.globl _padserbufempty
+                             50 	.globl _padsernextout
+                             51 	.globl _padsernextin
+                             52 	.globl _padserbuf
+                             53 	.globl _justswitchedon
+                             54 	.globl _savecaps
+                             55 	.globl _capsstate
+                             56 	.globl _thiskbdstate
+                             57 	.globl _lastkbdstate
+                             58 	.globl _padbufempty
+                             59 	.globl _padnextout
+                             60 	.globl _padnextin
+                             61 	.globl _padkeybuf
+                             62 	.globl _kbdstate2
+                             63 	.globl _kbdstate1
+                             64 	.globl _saveprinstat
+                             65 	.globl _diagnostics
+                             66 	.globl _initstack
+                             67 	.globl _criticalsp
+                             68 	.globl _criticalpc
+                             69 	.globl _nmichksums
+                             70 	.globl _nmimagic
+                             71 	.globl _savingcontext
+                             72 	.globl _savecritsp
+                             73 	.globl _savecritpc
+                             74 	.globl _savemmu3
+                             75 	.globl _savemmu2
+                             76 	.globl _savemmu1
+                             77 	.globl _savemmu0
+                             78 	.globl _savehldash
+                             79 	.globl _savededash
+                             80 	.globl _savebcdash
+                             81 	.globl _saveafdash
+                             82 	.globl _savesp
+                             83 	.globl _savepc
+                             84 	.globl _saveiy
+                             85 	.globl _saveix
+                             86 	.globl _savehl
+                             87 	.globl _savede
+                             88 	.globl _savebc
+                             89 	.globl _saveaf
+                             90 	.globl ___savehl
+                             91 	.globl ___saveaf
+                             92 	.globl ___savepearlmmu
+                             93 	.globl _gotcontext
+                             94 	.globl _copyofmmu3
+                             95 	.globl _copyofmmu2
+                             96 	.globl _copyofmmu1
+                             97 	.globl _copyofmmu0
+                             98 ;--------------------------------------------------------
+                             99 ; special function registers
+                            100 ;--------------------------------------------------------
+                    0010    101 _MMU0	=	0x0010
+                    0011    102 _MMU1	=	0x0011
+                    0012    103 _MMU2	=	0x0012
+                    0013    104 _MMU3	=	0x0013
+                    0020    105 _MCWAIT	=	0x0020
+                    0030    106 _BRCTRL	=	0x0030
+                    0050    107 _PARPORT	=	0x0050
+                    0050    108 _SNDCHAL	=	0x0050
+                    0051    109 _SNDCHAH	=	0x0051
+                    0060    110 _IRQMASK	=	0x0060
+                    0070    111 _PWROFF	=	0x0070
+                    0090    112 _IRQSTA	=	0x0090
+                    00A0    113 _MCSTAT	=	0x00a0
+                    00B0    114 _KBDROW0	=	0x00b0
+                    00B1    115 _KBDROW1	=	0x00b1
+                    00B2    116 _KBDROW2	=	0x00b2
+                    00B3    117 _KBDROW3	=	0x00b3
+                    00B4    118 _KBDROW4	=	0x00b4
+                    00B5    119 _KBDROW5	=	0x00b5
+                    00B6    120 _KBDROW6	=	0x00b6
+                    00B7    121 _KBDROW7	=	0x00b7
+                    00B8    122 _KBDROW8	=	0x00b8
+                    00B9    123 _KBDROW9	=	0x00b9
+                    00C0    124 _UARTDR	=	0x00c0
+                    00C1    125 _UARTSR	=	0x00c1
+                    00D0    126 _RTC0	=	0x00d0
+                    00D1    127 _RTC1	=	0x00d1
+                    00D2    128 _RTC2	=	0x00d2
+                    00D3    129 _RTC3	=	0x00d3
+                    00D4    130 _RTC4	=	0x00d4
+                    00D5    131 _RTC5	=	0x00d5
+                    00D6    132 _RTC6	=	0x00d6
+                    00D7    133 _RTC7	=	0x00d7
+                    00D8    134 _RTC8	=	0x00d8
+                    00D9    135 _RTC9	=	0x00d9
+                    00DA    136 _RTCA	=	0x00da
+                    00DB    137 _RTCB	=	0x00db
+                    00DC    138 _RTCC	=	0x00dc
+                    00DD    139 _RTCD	=	0x00dd
+                    00DE    140 _RTCE	=	0x00de
+                    00DF    141 _RTCF	=	0x00df
+                            142 ;--------------------------------------------------------
+                            143 ;  ram data
+                            144 ;--------------------------------------------------------
+                            145 	.area _DATA
+                    B000    146 _copyofmmu0	=	0xb000
+                    B001    147 _copyofmmu1	=	0xb001
+                    B002    148 _copyofmmu2	=	0xb002
+                    B003    149 _copyofmmu3	=	0xb003
+                    B004    150 _gotcontext	=	0xb004
+                    B005    151 ___savepearlmmu	=	0xb005
+                    B006    152 ___saveaf	=	0xb006
+                    B008    153 ___savehl	=	0xb008
+                    B00A    154 _saveaf	=	0xb00a
+                    B00C    155 _savebc	=	0xb00c
+                    B00E    156 _savede	=	0xb00e
+                    B010    157 _savehl	=	0xb010
+                    B012    158 _saveix	=	0xb012
+                    B014    159 _saveiy	=	0xb014
+                    B016    160 _savepc	=	0xb016
+                    B018    161 _savesp	=	0xb018
+                    B01A    162 _saveafdash	=	0xb01a
+                    B01C    163 _savebcdash	=	0xb01c
+                    B01E    164 _savededash	=	0xb01e
+                    B020    165 _savehldash	=	0xb020
+                    B022    166 _savemmu0	=	0xb022
+                    B023    167 _savemmu1	=	0xb023
+                    B024    168 _savemmu2	=	0xb024
+                    B025    169 _savemmu3	=	0xb025
+                    B026    170 _savecritpc	=	0xb026
+                    B028    171 _savecritsp	=	0xb028
+                    B02A    172 _savingcontext	=	0xb02a
+                    B02B    173 _nmimagic	=	0xb02b
+                    B02F    174 _nmichksums	=	0xb02f
+                    B037    175 _criticalpc	=	0xb037
+                    B039    176 _criticalsp	=	0xb039
+                    B03B    177 _initstack	=	0xb03b
+                    B08B    178 _diagnostics	=	0xb08b
+                    B08C    179 _saveprinstat	=	0xb08c
+                    B08D    180 _kbdstate1	=	0xb08d
+                    B097    181 _kbdstate2	=	0xb097
+                    B0A1    182 _padkeybuf	=	0xb0a1
+                    B0E1    183 _padnextin	=	0xb0e1
+                    B0E1    184 _padnextout	=	0xb0e1
+                    B0E3    185 _padbufempty	=	0xb0e3
+                    B0E4    186 _lastkbdstate	=	0xb0e4
+                    B0E6    187 _thiskbdstate	=	0xb0e6
+                    B0E8    188 _capsstate	=	0xb0e8
+                    B0E9    189 _savecaps	=	0xb0e9
+                    B0EA    190 _justswitchedon	=	0xb0ea
+                    B0EB    191 _padserbuf	=	0xb0eb
+                    B10B    192 _padsernextin	=	0xb10b
+                    B10C    193 _padsernextout	=	0xb10c
+                    B10D    194 _padserbufempty	=	0xb10d
+                    B10E    195 _padserin_xoff	=	0xb10e
+                    B10F    196 _padserout_xoff	=	0xb10f
+                    B110    197 _disablexonxoff	=	0xb110
+                    B111    198 _ackirq	=	0xb111
+                    B112    199 _rptdelay	=	0xb112
+                    B113    200 _rptrate	=	0xb113
+                    B114    201 _rpttimer	=	0xb114
+                    B115    202 _keytorepeat	=	0xb115
+                    B116    203 _rptkeystates	=	0xb116
+                    B117    204 _rtcbuf	=	0xb117
+                    B124    205 _dalarmday	=	0xb124
+                    B12A    206 _alarmhappened	=	0xb12a
+                    B12B    207 _alarmhappenedgotmsg	=	0xb12b
+                    B12C    208 _soundcounter	=	0xb12c
+                    B12D    209 _soundptr	=	0xb12d
+                    B12F    210 _soundrepcount	=	0xb12f
+                    B130    211 _soundrepptr	=	0xb130
+                    B132    212 _poweroffminutes	=	0xb132
+                    B133    213 _minutesleft	=	0xb133
+                    B134    214 _minutecounter	=	0xb134
+                    B136    215 _eventhappened	=	0xb136
+                    B137    216 _preservecontext	=	0xb137
+                    B138    217 _dontpreservecontext	=	0xb138
+                    B139    218 _mainprog	=	0xb139
+                    B13A    219 _currentprinter	=	0xb13a
+                    B13B    220 _currentmenu	=	0xb13b
+                    B13D    221 _wasmenusel	=	0xb13d
+                    B13E    222 _lastsecond	=	0xb13e
+                    B13F    223 _clockon	=	0xb13f
+                    B140    224 _sdumpname	=	0xb140
+                    B148    225 _dworkspace	=	0xb148
+                    B150    226 _ddatebuf	=	0xb150
+                    B162    227 _dasciitime	=	0xb162
+                    B1BA    228 _goutstream	=	0xb1ba
+                    B1BB    229 _ghoutfile	=	0xb1bb
+                    B1BD    230 _gpos	=	0xb1bd
+                            231 ;--------------------------------------------------------
+                            232 ; overlayable items in  ram 
+                            233 ;--------------------------------------------------------
+                            234 	.area _OVERLAY
+                            235 ;--------------------------------------------------------
+                            236 ; external initialized ram data
+                            237 ;--------------------------------------------------------
+                            238 ;--------------------------------------------------------
+                            239 ; global & static initialisations
+                            240 ;--------------------------------------------------------
+                            241 	.area _HOME
+                            242 	.area _GSINIT
+                            243 	.area _GSFINAL
+                            244 	.area _GSINIT
+                            245 ;--------------------------------------------------------
+                            246 ; Home
+                            247 ;--------------------------------------------------------
+                            248 	.area _HOME
+                            249 	.area _HOME
+                            250 ;--------------------------------------------------------
+                            251 ; code
+                            252 ;--------------------------------------------------------
+                            253 	.area _CODE
+                            254 ;hello.c:8: int main(void)
+                            255 ;	---------------------------------
+                            256 ; Function main
+                            257 ; ---------------------------------
+   0000                     258 _main_start::
+   0000                     259 _main:
+   0000 DD E5               260 	push	ix
+   0002 DD 21 00 00         261 	ld	ix,#0
+   0006 DD 39               262 	add	ix,sp
+   0008 21 EA FF            263 	ld	hl,#-22
+   000B 39                  264 	add	hl,sp
+   000C F9                  265 	ld	sp,hl
+                            266 ;hello.c:13: eingabe[0] = 0; 
+   000D 21 00 00            267 	ld	hl,#0x0000
+   0010 39                  268 	add	hl,sp
+   0011 4D                  269 	ld	c,l
+   0012 44                  270 	ld	b,h
+   0013 36 00               271 	ld	(hl),#0x00
+                            272 ;hello.c:14: firmver=padgetversion();
+   0015 C5                  273 	push	bc
+   0016 CDr00s00            274 	call	_padgetversion
+   0019 C1                  275 	pop	bc
+   001A DD 75 FE            276 	ld	-2 (ix),l
+   001D DD 74 FF            277 	ld	-1 (ix),h
+                            278 ;hello.c:16: SNDCHAL = 50;
+   0020 3E 32               279 	ld	a,#0x32
+   0022 D3 50               280 	out	(_SNDCHAL),a
+                            281 ;hello.c:17: SNDCHAH = 30;
+   0024 3E 1E               282 	ld	a,#0x1E
+   0026 D3 51               283 	out	(_SNDCHAH),a
+                            284 ;hello.c:19: printf("Current Time: %s\n", dasciitime);
+   0028 C5                  285 	push	bc
+   0029 21 62 B1            286 	ld	hl,#_dasciitime
+   002C E5                  287 	push	hl
+   002D 21rADs00            288 	ld	hl,#__str_0
+   0030 E5                  289 	push	hl
+   0031 CDr00s00            290 	call	_printf
+   0034 F1                  291 	pop	af
+   0035 21 01 01            292 	ld	hl,#0x0101
+   0038 E3                  293 	ex	(sp),hl
+   0039 CDr00s00            294 	call	_txtsetcursor
+   003C 21 27 00            295 	ld	hl,#0x0027
+   003F E3                  296 	ex	(sp),hl
+   0040 21rBFs00            297 	ld	hl,#__str_1
+   0043 E5                  298 	push	hl
+   0044 CDr00s00            299 	call	_printf
+   0047 F1                  300 	pop	af
+   0048 F1                  301 	pop	af
+   0049 CDr00s00            302 	call	_txtboldon
+   004C C1                  303 	pop	bc
+                            304 ;hello.c:23: printf("Your firmware version is: %i, mmu0 is %02X\n", firmver,copyofmmu0);
+   004D 21 00 B0            305 	ld	hl,#_copyofmmu0 + 0
+   0050 5E                  306 	ld	e,(hl)
+   0051 16 00               307 	ld	d,#0x00
+   0053 C5                  308 	push	bc
+   0054 D5                  309 	push	de
+   0055 DD 6E FE            310 	ld	l,-2 (ix)
+   0058 DD 66 FF            311 	ld	h,-1 (ix)
+   005B E5                  312 	push	hl
+   005C 21rE3s00            313 	ld	hl,#__str_2
+   005F E5                  314 	push	hl
+   0060 CDr00s00            315 	call	_printf
+   0063 F1                  316 	pop	af
+   0064 F1                  317 	pop	af
+   0065 F1                  318 	pop	af
+   0066 CDr00s00            319 	call	_txtboldoff
+   0069 21r0Fs01            320 	ld	hl,#__str_3
+   006C E5                  321 	push	hl
+   006D CDr00s00            322 	call	_printf
+   0070 21 41 00            323 	ld	hl,#0x0041
+   0073 E3                  324 	ex	(sp),hl
+   0074 CDr00s00            325 	call	_kmcharreturn
+   0077 F1                  326 	pop	af
+   0078 C1                  327 	pop	bc
+                            328 ;hello.c:27: if (editbuf(eingabe, 20, EDITBUF_DOTTY))
+   0079 C5                  329 	push	bc
+   007A 21 14 40            330 	ld	hl,#0x4014
+   007D E5                  331 	push	hl
+   007E C5                  332 	push	bc
+   007F CDr00s00            333 	call	_editbuf
+   0082 F1                  334 	pop	af
+   0083 F1                  335 	pop	af
+   0084 C1                  336 	pop	bc
+   0085 AF                  337 	xor	a,a
+   0086 B5                  338 	or	a,l
+   0087 28 0C               339 	jr	Z,00102$
+                            340 ;hello.c:29: printf("\nYour name is %s\n", eingabe);
+   0089 C5                  341 	push	bc
+   008A 21r27s01            342 	ld	hl,#__str_4
+   008D E5                  343 	push	hl
+   008E CDr00s00            344 	call	_printf
+   0091 F1                  345 	pop	af
+   0092 F1                  346 	pop	af
+   0093 18 08               347 	jr	00103$
+   0095                     348 00102$:
+                            349 ;hello.c:33: printf("\nOk, you're to shy!\n");
+   0095 21r39s01            350 	ld	hl,#__str_5
+   0098 E5                  351 	push	hl
+   0099 CDr00s00            352 	call	_printf
+   009C F1                  353 	pop	af
+   009D                     354 00103$:
+                            355 ;hello.c:36: printf("\nPress any key to quit");
+   009D 21r4Es01            356 	ld	hl,#__str_6
+   00A0 E5                  357 	push	hl
+   00A1 CDr00s00            358 	call	_printf
+   00A4 F1                  359 	pop	af
+                            360 ;hello.c:37: getchar();
+   00A5 CDr00s00            361 	call	_getchar
+   00A8 DD F9               362 	ld	sp,ix
+   00AA DD E1               363 	pop	ix
+   00AC C9                  364 	ret
+   00AD                     365 _main_end::
+   00AD                     366 __str_0:
+   00AD 43 75 72 72 65 6E   367 	.ascii "Current Time: %s"
         74 20 54 69 6D 65
         3A 20 25 73
-   00B6 0A                  345 	.db 0x0A
-   00B7 00                  346 	.db 0x00
-   00B8                     347 __str_1:
-   00B8 43 20 6F 6E 20 74   348 	.ascii "C on the Amstrad Notepad, Build %i"
+   00BD 0A                  368 	.db 0x0A
+   00BE 00                  369 	.db 0x00
+   00BF                     370 __str_1:
+   00BF 43 20 6F 6E 20 74   371 	.ascii "C on the Amstrad Notepad, Build %i"
         68 65 20 41 6D 73
         74 72 61 64 20 4E
         6F 74 65 70 61 64
         2C 20 42 75 69 6C
         64 20 25 69
-   00DA 0A                  349 	.db 0x0A
-   00DB 00                  350 	.db 0x00
-   00DC                     351 __str_2:
-   00DC 59 6F 75 72 20 66   352 	.ascii "Your firmware version is: %i, mmu0 is %02X"
+   00E1 0A                  372 	.db 0x0A
+   00E2 00                  373 	.db 0x00
+   00E3                     374 __str_2:
+   00E3 59 6F 75 72 20 66   375 	.ascii "Your firmware version is: %i, mmu0 is %02X"
         69 72 6D 77 61 72
         65 20 76 65 72 73
         69 6F 6E 20 69 73
         3A 20 25 69 2C 20
         6D 6D 75 30 20 69
         73 20 25 30 32 58
-   0106 0A                  353 	.db 0x0A
-   0107 00                  354 	.db 0x00
-   0108                     355 __str_3:
-   0108 50 6C 65 61 73 65   356 	.ascii "Please enter your name:"
+   010D 0A                  376 	.db 0x0A
+   010E 00                  377 	.db 0x00
+   010F                     378 __str_3:
+   010F 50 6C 65 61 73 65   379 	.ascii "Please enter your name:"
         20 65 6E 74 65 72
         20 79 6F 75 72 20
         6E 61 6D 65 3A
-   011F 00                  357 	.db 0x00
-   0120                     358 __str_4:
-   0120 0A                  359 	.db 0x0A
-   0121 59 6F 75 72 20 6E   360 	.ascii "Your name is %s"
+   0126 00                  380 	.db 0x00
+   0127                     381 __str_4:
+   0127 0A                  382 	.db 0x0A
+   0128 59 6F 75 72 20 6E   383 	.ascii "Your name is %s"
         61 6D 65 20 69 73
         20 25 73
-   0130 0A                  361 	.db 0x0A
-   0131 00                  362 	.db 0x00
-   0132                     363 __str_5:
-   0132 0A                  364 	.db 0x0A
-   0133 4F 6B 2C 20 79 6F   365 	.ascii "Ok, you're to shy!"
+   0137 0A                  384 	.db 0x0A
+   0138 00                  385 	.db 0x00
+   0139                     386 __str_5:
+   0139 0A                  387 	.db 0x0A
+   013A 4F 6B 2C 20 79 6F   388 	.ascii "Ok, you're to shy!"
         75 27 72 65 20 74
         6F 20 73 68 79 21
-   0145 0A                  366 	.db 0x0A
-   0146 00                  367 	.db 0x00
-   0147                     368 __str_6:
-   0147 0A                  369 	.db 0x0A
-   0148 50 72 65 73 73 20   370 	.ascii "Press any key to quit"
+   014C 0A                  389 	.db 0x0A
+   014D 00                  390 	.db 0x00
+   014E                     391 __str_6:
+   014E 0A                  392 	.db 0x0A
+   014F 50 72 65 73 73 20   393 	.ascii "Press any key to quit"
         61 6E 79 20 6B 65
         79 20 74 6F 20 71
         75 69 74
-   015D 00                  371 	.db 0x00
-                            372 	.area _CODE
-                            373 	.area _CABS
+   0164 00                  394 	.db 0x00
+                            395 	.area _CODE
+                            396 	.area _CABS

@@ -23,6 +23,7 @@ int main(void)
    printf("Your firmware version is: %i, mmu0 is %02X\n", firmver,copyofmmu0);
    txtboldoff();
    printf("Please enter your name:");
+   kmcharreturn(65);
    if (editbuf(eingabe, 20, EDITBUF_DOTTY))
    {
     printf("\nYour name is %s\n", eingabe);

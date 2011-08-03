@@ -47,23 +47,26 @@ Symbol Table
     ___saveaf                                                   =  B006 G
     ___savehl                                                   =  B008 G
     ___savepearlmmu                                             =  B005 G
-  0 __str_0                                                        00A6 R
-  0 __str_1                                                        00B8 R
-  0 __str_2                                                        00DC R
-  0 __str_3                                                        0108 R
-  0 __str_4                                                        0120 R
-  0 __str_5                                                        0132 R
-  0 __str_6                                                        0147 R
+  0 __str_0                                                        00AD R
+  0 __str_1                                                        00BF R
+  0 __str_2                                                        00E3 R
+  0 __str_3                                                        010F R
+  0 __str_4                                                        0127 R
+  0 __str_5                                                        0139 R
+  0 __str_6                                                        014E R
     _ackirq                                                     =  B111 G
     _alarmhappened                                              =  B12A G
     _alarmhappenedgotmsg                                        =  B12B G
     _capsstate                                                  =  B0E8 G
+    _clockon                                                    =  B13F G
     _copyofmmu0                                                 =  B000 G
     _copyofmmu1                                                 =  B001 G
     _copyofmmu2                                                 =  B002 G
     _copyofmmu3                                                 =  B003 G
     _criticalpc                                                 =  B037 G
     _criticalsp                                                 =  B039 G
+    _currentmenu                                                =  B13B G
+    _currentprinter                                             =  B13A G
     _dalarmday                                                  =  B124 G
     _dasciitime                                                 =  B162 G
     _ddatebuf                                                   =  B150 G
@@ -74,16 +77,22 @@ Symbol Table
     _editbuf                                                       **** GX
     _eventhappened                                              =  B136 G
     _getchar                                                       **** GX
+    _ghoutfile                                                  =  B1BB G
     _gotcontext                                                 =  B004 G
+    _goutstream                                                 =  B1BA G
+    _gpos                                                       =  B1BD G
     _initstack                                                  =  B03B G
     _justswitchedon                                             =  B0EA G
     _kbdstate1                                                  =  B08D G
     _kbdstate2                                                  =  B097 G
     _keytorepeat                                                =  B115 G
+    _kmcharreturn                                                  **** GX
     _lastkbdstate                                               =  B0E4 G
+    _lastsecond                                                 =  B13E G
   0 _main                                                          0000 GR
-  0 _main_end                                                      00A6 GR
+  0 _main_end                                                      00AD GR
   0 _main_start                                                    0000 GR
+    _mainprog                                                   =  B139 G
     _minutecounter                                              =  B134 G
     _minutesleft                                                =  B133 G
     _nmichksums                                                 =  B02F G
@@ -128,6 +137,7 @@ Symbol Table
     _saveprinstat                                               =  B08C G
     _savesp                                                     =  B018 G
     _savingcontext                                              =  B02A G
+    _sdumpname                                                  =  B140 G
     _soundcounter                                               =  B12C G
     _soundptr                                                   =  B12D G
     _soundrepcount                                              =  B12F G
@@ -136,12 +146,13 @@ Symbol Table
     _txtboldoff                                                    **** GX
     _txtboldon                                                     **** GX
     _txtsetcursor                                                  **** GX
+    _wasmenusel                                                 =  B13D G
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods + Flat24  (Zilog Z80 / Hitachi HD64180), page 2.
 
 Area Table
 
-   0 _CODE                                      size  15E   flags 0
+   0 _CODE                                      size  165   flags 0
    1 _DATA                                      size    0   flags 0
    2 _OVERLAY                                   size    0   flags 0
    3 _HOME                                      size    0   flags 0
