@@ -120,6 +120,12 @@ char editbuf(char* inputbuf, unsigned char size, char flags);
 /* returns a token to the keyboard buffer */
 void kmcharreturn(unsigned int token);
 
+/* Gets a key token if there is one, does not wait. Returns 0 if no key avaliable */
+int kmreadkbd(void);
+
+/* same as kmreadkbd, but macros are expanded */
+int kmreadchar(void);
+
 
 /* moves the cursor */
 void txtsetcursor(char column, char row);

@@ -1,9 +1,0 @@
-XL
-H 1 areas 2 global symbols
-S .__.ABS. Def0000
-A _CODE size A flags 0 addr 0
-S _kmcharreturn Def0000
-T 00 00
-R 00 00 00 00
-T 00 00 21 02 00 39 4E 23 46 C3 03 B8
-R 00 00 00 00

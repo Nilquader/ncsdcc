@@ -1,9 +1,0 @@
-; void kmcharreturn(unsigned int token);
-_kmcharreturn::
-	ld hl, #2
-	add hl,sp
-	ld c,(hl)
-	inc hl
-	ld b,(hl)
-
-	jmp 0xB803 ; kmcharreturn 
