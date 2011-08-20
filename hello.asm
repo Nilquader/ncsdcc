@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.0.0 #6037 (Jul 10 2011) (Mac OS X x86_64)
-; This file was generated Fri Aug 19 23:51:37 2011
+; This file was generated Sat Aug 20 20:21:33 2011
 ;--------------------------------------------------------
 	.module hello
 	.optsdcc -mz80
@@ -357,9 +357,9 @@ _main:
 	push	hl
 	call	_printf
 	pop	af
-;hello.c:37: while(kmreadkbd() == 0);
+;hello.c:37: while(kmreadchar() == 0);
 00104$:
-	call	_kmreadkbd
+	call	_kmreadchar
 	ld	a,l
 	or	a,h
 	jr	Z,00104$

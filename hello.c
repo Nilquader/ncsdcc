@@ -34,6 +34,6 @@ int main(void)
    }
    
    printf("\nPress any key to quit");
-   while(kmreadkbd() == 0);
+   while(kmreadchar() == 0);
    // getchar();
 }
