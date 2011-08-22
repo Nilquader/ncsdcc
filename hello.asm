@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.0.0 #6037 (Jul 10 2011) (Mac OS X x86_64)
-; This file was generated Sat Aug 20 20:21:33 2011
+; This file was generated Mon Aug 22 20:45:26 2011
 ;--------------------------------------------------------
 	.module hello
 	.optsdcc -mz80
@@ -352,17 +352,30 @@ _main:
 	call	_printf
 	pop	af
 00103$:
-;hello.c:36: printf("\nPress any key to quit");
+;hello.c:36: printf("\nPress any key to continue");
 	ld	hl,#__str_6
 	push	hl
 	call	_printf
 	pop	af
-;hello.c:37: while(kmreadchar() == 0);
-00104$:
-	call	_kmreadchar
-	ld	a,l
-	or	a,h
-	jr	Z,00104$
+;hello.c:37: kmsettickcount(0,0);
+	ld	hl,#0x0000
+	push	hl
+	ld	l, #0x00
+	push	hl
+	call	_kmsettickcount
+	pop	af
+	pop	af
+;hello.c:38: kmwaitkbd();
+	call	_kmwaitkbd
+;hello.c:39: col1();
+	call	_col1
+;hello.c:40: printf("Press a key to quit!");
+	ld	hl,#__str_7
+	push	hl
+	call	_printf
+	pop	af
+;hello.c:41: kmwaitkbd();
+	call	_kmwaitkbd
 	ld	sp,ix
 	pop	ix
 	ret
@@ -394,7 +407,10 @@ __str_5:
 	.db 0x00
 __str_6:
 	.db 0x0A
-	.ascii "Press any key to quit"
+	.ascii "Press any key to continue"
+	.db 0x00
+__str_7:
+	.ascii "Press a key to quit!"
 	.db 0x00
 	.area _CODE
 	.area _CABS

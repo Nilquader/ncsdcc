@@ -33,7 +33,11 @@ int main(void)
     printf("\nOk, you're to shy!\n");
    }
    
-   printf("\nPress any key to quit");
-   while(kmreadchar() == 0);
+   printf("\nPress any key to continue");
+   kmsettickcount(0,0);
+   kmwaitkbd();
+   col1();
+   printf("Press a key to quit!");
+   kmwaitkbd();
    // getchar();
 }

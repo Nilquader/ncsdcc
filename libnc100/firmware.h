@@ -121,10 +121,19 @@ char editbuf(char* inputbuf, unsigned char size, char flags);
 void kmcharreturn(unsigned int token);
 
 /* Gets a key token if there is one, does not wait. Returns 0 if no key avaliable */
-int kmreadkbd(void);
+unsigned int kmreadkbd(void);
 
 /* same as kmreadkbd, but macros are expanded */
-int kmreadchar(void);
+unsigned int kmreadchar(void);
+
+/* Enables the ticker event,  There are 100 ticks per second */
+void kmsettickcount(unsigned int firstevent,unsigned int nextevent);
+
+/* wait for a key token, uses kmreadkbd */
+unsigned int kmwaitkbd(void);
+
+/* move cursor to start of next line */
+void col1(void);
 
 
 /* moves the cursor */

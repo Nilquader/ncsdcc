@@ -1,4 +1,4 @@
-; int kmreadkbd(void);
+; unsigned int kmreadkbd(void);
 _kmreadkbd::
 	ld hl, #0x0000
 	call 0xB806 ; kmreadkbd
