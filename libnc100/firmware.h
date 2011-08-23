@@ -135,6 +135,16 @@ unsigned int kmwaitkbd(void);
 /* move cursor to start of next line */
 void col1(void);
 
+/* clears current window and moves cursor to top left */
+void txtclearwindow(void);
+
+/* removes the cursor from the screen */
+void txtcuroff(void);
+
+/* displays the cursor on the screen */
+void txtcuron(void);
+
+
 
 /* moves the cursor */
 void txtsetcursor(char column, char row);

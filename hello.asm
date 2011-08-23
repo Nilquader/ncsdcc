@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.0.0 #6037 (Jul 10 2011) (Mac OS X x86_64)
-; This file was generated Mon Aug 22 20:45:26 2011
+; This file was generated Tue Aug 23 22:00:53 2011
 ;--------------------------------------------------------
 	.module hello
 	.optsdcc -mz80
@@ -324,8 +324,9 @@ _main:
 	ex	(sp),hl
 	call	_kmcharreturn
 	pop	af
+	call	_txtcuroff
 	pop	bc
-;hello.c:27: if (editbuf(eingabe, 20, EDITBUF_DOTTY))
+;hello.c:28: if (editbuf(eingabe, 20, EDITBUF_DOTTY))
 	push	bc
 	ld	hl,#0x4014
 	push	hl
@@ -337,7 +338,7 @@ _main:
 	xor	a,a
 	or	a,l
 	jr	Z,00102$
-;hello.c:29: printf("\nYour name is %s\n", eingabe);
+;hello.c:30: printf("\nYour name is %s\n", eingabe);
 	push	bc
 	ld	hl,#__str_4
 	push	hl
@@ -346,18 +347,22 @@ _main:
 	pop	af
 	jr	00103$
 00102$:
-;hello.c:33: printf("\nOk, you're to shy!\n");
+;hello.c:34: printf("\nOk, you're to shy!\n");
 	ld	hl,#__str_5
 	push	hl
 	call	_printf
 	pop	af
 00103$:
-;hello.c:36: printf("\nPress any key to continue");
+;hello.c:36: txtcuron();
+	call	_txtcuron
+;hello.c:38: txtclearwindow();
+	call	_txtclearwindow
+;hello.c:39: printf("\nPress any key to continue");
 	ld	hl,#__str_6
 	push	hl
 	call	_printf
 	pop	af
-;hello.c:37: kmsettickcount(0,0);
+;hello.c:40: kmsettickcount(0,0);
 	ld	hl,#0x0000
 	push	hl
 	ld	l, #0x00
@@ -365,16 +370,16 @@ _main:
 	call	_kmsettickcount
 	pop	af
 	pop	af
-;hello.c:38: kmwaitkbd();
+;hello.c:41: kmwaitkbd();
 	call	_kmwaitkbd
-;hello.c:39: col1();
+;hello.c:42: col1();
 	call	_col1
-;hello.c:40: printf("Press a key to quit!");
+;hello.c:43: printf("Press a key to quit!");
 	ld	hl,#__str_7
 	push	hl
 	call	_printf
 	pop	af
-;hello.c:41: kmwaitkbd();
+;hello.c:44: kmwaitkbd();
 	call	_kmwaitkbd
 	ld	sp,ix
 	pop	ix

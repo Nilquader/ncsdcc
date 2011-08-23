@@ -3,7 +3,7 @@
 #include "libnc100/nc100.h"
 #include "libnc100/firmware.h"
 
-#define BUILD 39
+#define BUILD 40
 
 int main(void)
 {
@@ -24,6 +24,7 @@ int main(void)
    txtboldoff();
    printf("Please enter your name:");
    kmcharreturn(65);
+   txtcuroff();
    if (editbuf(eingabe, 20, EDITBUF_DOTTY))
    {
     printf("\nYour name is %s\n", eingabe);
@@ -32,7 +33,9 @@ int main(void)
    {
     printf("\nOk, you're to shy!\n");
    }
+   txtcuron();
    
+   txtclearwindow();
    printf("\nPress any key to continue");
    kmsettickcount(0,0);
    kmwaitkbd();
