@@ -9,6 +9,7 @@ int main(void)
 {
    int firmver;
    char eingabe[20];
+   char *file;
 
    eingabe[0] = 0; 
    firmver=padgetversion();
@@ -34,6 +35,7 @@ int main(void)
     printf("\nOk, you're to shy!\n");
    }
    txtcuron();
+   getchar();
    
    txtclearwindow();
    printf("\nPress any key to continue");
@@ -41,6 +43,14 @@ int main(void)
    kmwaitkbd();
    col1();
    printf("Press a key to quit!");
+   kmwaitkbd();
+   file = selectfile();
+   if (file == NULL) {
+    printf("Don't you want to view a file?\n");
+   } else {
+    printf("Your file was %s!\n", file);
+   }
+   
    kmwaitkbd();
    // getchar();
 }

@@ -6,9 +6,9 @@
  *
  */
 
-#ifndef NC100_H
-#define NC100_H
- 
+#ifndef __NC100_H
+#define __NC100_H
+
 // Constants for Baud rate control register
 #define BR_COMMONCR 0x80
 #define BR_STROBE   0x40
@@ -70,4 +70,4 @@ __sfr __at 0xDD RTCD; // RTC Register 13
 __sfr __at 0xDE RTCE; // RTC Register 14
 __sfr __at 0xDF RTCF; // RTC Register 15
 
-#endif /* nc100.h */
+#endif /* __NC100_H */

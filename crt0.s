@@ -16,7 +16,7 @@
 	
 init:
 	;; Stack at the top of memory.
-	;;ld	sp,#0xffff
+	;; ld	sp,#0xffff
 
         ;; Initialise global variables
         call    gsinit

@@ -144,8 +144,6 @@ void txtcuroff(void);
 /* displays the cursor on the screen */
 void txtcuron(void);
 
-
-
 /* moves the cursor */
 void txtsetcursor(char column, char row);
 
@@ -156,6 +154,10 @@ void txtinverseoff(void);
 void txtinverseon(void);
 void txtunderlineoff(void);
 void txtunderlineon(void);
+
+/* displays the file selector (clears the screen first) */
+/* returns NULL if STOP pressed */
+char* selectfile(void);
 
 /* gets the firmware version number */
 int padgetversion(void);

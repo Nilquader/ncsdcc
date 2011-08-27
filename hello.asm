@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.0.0 #6037 (Jul 10 2011) (Mac OS X x86_64)
-; This file was generated Tue Aug 23 22:00:53 2011
+; This file was generated Sat Aug 27 12:14:59 2011
 ;--------------------------------------------------------
 	.module hello
 	.optsdcc -mz80
@@ -263,25 +263,25 @@ _main:
 	ld	hl,#-22
 	add	hl,sp
 	ld	sp,hl
-;hello.c:13: eingabe[0] = 0; 
+;hello.c:14: eingabe[0] = 0; 
 	ld	hl,#0x0000
 	add	hl,sp
 	ld	c,l
 	ld	b,h
 	ld	(hl),#0x00
-;hello.c:14: firmver=padgetversion();
+;hello.c:15: firmver=padgetversion();
 	push	bc
 	call	_padgetversion
 	pop	bc
 	ld	-2 (ix),l
 	ld	-1 (ix),h
-;hello.c:16: SNDCHAL = 50;
+;hello.c:17: SNDCHAL = 50;
 	ld	a,#0x32
 	out	(_SNDCHAL),a
-;hello.c:17: SNDCHAH = 30;
+;hello.c:18: SNDCHAH = 30;
 	ld	a,#0x1E
 	out	(_SNDCHAH),a
-;hello.c:19: printf("Current Time: %s\n", dasciitime);
+;hello.c:20: printf("Current Time: %s\n", dasciitime);
 	push	bc
 	ld	hl,#_dasciitime
 	push	hl
@@ -292,7 +292,7 @@ _main:
 	ld	hl,#0x0101
 	ex	(sp),hl
 	call	_txtsetcursor
-	ld	hl,#0x0027
+	ld	hl,#0x0028
 	ex	(sp),hl
 	ld	hl,#__str_1
 	push	hl
@@ -301,7 +301,7 @@ _main:
 	pop	af
 	call	_txtboldon
 	pop	bc
-;hello.c:23: printf("Your firmware version is: %i, mmu0 is %02X\n", firmver,copyofmmu0);
+;hello.c:24: printf("Your firmware version is: %i, mmu0 is %02X\n", firmver,copyofmmu0);
 	ld	hl,#_copyofmmu0 + 0
 	ld	e,(hl)
 	ld	d,#0x00
@@ -326,7 +326,7 @@ _main:
 	pop	af
 	call	_txtcuroff
 	pop	bc
-;hello.c:28: if (editbuf(eingabe, 20, EDITBUF_DOTTY))
+;hello.c:29: if (editbuf(eingabe, 20, EDITBUF_DOTTY))
 	push	bc
 	ld	hl,#0x4014
 	push	hl
@@ -338,7 +338,7 @@ _main:
 	xor	a,a
 	or	a,l
 	jr	Z,00102$
-;hello.c:30: printf("\nYour name is %s\n", eingabe);
+;hello.c:31: printf("\nYour name is %s\n", eingabe);
 	push	bc
 	ld	hl,#__str_4
 	push	hl
@@ -347,22 +347,24 @@ _main:
 	pop	af
 	jr	00103$
 00102$:
-;hello.c:34: printf("\nOk, you're to shy!\n");
+;hello.c:35: printf("\nOk, you're to shy!\n");
 	ld	hl,#__str_5
 	push	hl
 	call	_printf
 	pop	af
 00103$:
-;hello.c:36: txtcuron();
+;hello.c:37: txtcuron();
 	call	_txtcuron
-;hello.c:38: txtclearwindow();
+;hello.c:38: getchar();
+	call	_getchar
+;hello.c:40: txtclearwindow();
 	call	_txtclearwindow
-;hello.c:39: printf("\nPress any key to continue");
+;hello.c:41: printf("\nPress any key to continue");
 	ld	hl,#__str_6
 	push	hl
 	call	_printf
 	pop	af
-;hello.c:40: kmsettickcount(0,0);
+;hello.c:42: kmsettickcount(0,0);
 	ld	hl,#0x0000
 	push	hl
 	ld	l, #0x00
@@ -370,16 +372,41 @@ _main:
 	call	_kmsettickcount
 	pop	af
 	pop	af
-;hello.c:41: kmwaitkbd();
+;hello.c:43: kmwaitkbd();
 	call	_kmwaitkbd
-;hello.c:42: col1();
+;hello.c:44: col1();
 	call	_col1
-;hello.c:43: printf("Press a key to quit!");
+;hello.c:45: printf("Press a key to quit!");
 	ld	hl,#__str_7
 	push	hl
 	call	_printf
 	pop	af
-;hello.c:44: kmwaitkbd();
+;hello.c:46: kmwaitkbd();
+	call	_kmwaitkbd
+;hello.c:47: file = selectfile();
+	call	_selectfile
+	ld	c,l
+	ld	b,h
+;hello.c:48: if (file == NULL) {
+	ld	a,c
+	or	a,b
+	jr	NZ,00105$
+;hello.c:49: printf("Don't you want to view a file?\n");
+	ld	hl,#__str_8
+	push	hl
+	call	_printf
+	pop	af
+	jr	00106$
+00105$:
+;hello.c:51: printf("Your file was %s!\n", file);
+	push	bc
+	ld	hl,#__str_9
+	push	hl
+	call	_printf
+	pop	af
+	pop	af
+00106$:
+;hello.c:54: kmwaitkbd();
 	call	_kmwaitkbd
 	ld	sp,ix
 	pop	ix
@@ -416,6 +443,14 @@ __str_6:
 	.db 0x00
 __str_7:
 	.ascii "Press a key to quit!"
+	.db 0x00
+__str_8:
+	.ascii "Don't you want to view a file?"
+	.db 0x0A
+	.db 0x00
+__str_9:
+	.ascii "Your file was %s!"
+	.db 0x0A
 	.db 0x00
 	.area _CODE
 	.area _CABS
