@@ -15,6 +15,7 @@ SNAP=~/z80xdev/snaplinux/snap
 EMU=~/z80xdev/nc100em-1.2/dnc100em -m
 
 # targets
+.PHONY: all clean
 all: card.bin
 snapshot: test.card
 test: test.card
@@ -30,6 +31,8 @@ clean:
 	rm -f *.lst
 	rm -f *.noi
 	rm -f *~
+	rm -f card
+	rm -f card.bin
 
 test.card: card.bin nc100.card
 	$(SNAP) test.card -h 512 -i nc100.card -l card.bin 0000
