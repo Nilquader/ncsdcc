@@ -10,6 +10,7 @@ int main(void)
    int firmver;
    char eingabe[20];
    char *file;
+   char row, col;
 
    eingabe[0] = 0; 
    firmver=padgetversion();
@@ -28,7 +29,8 @@ int main(void)
    txtcuroff();
    if (editbuf(eingabe, 20, EDITBUF_DOTTY))
    {
-    printf("\nYour name is %s\n", eingabe);
+    txtgetcursor(&col, &row);
+    printf("\nYour name is %s and the cursor was at (%i, %i)\n", eingabe, col, row);
    }
    else
    {
@@ -53,4 +55,6 @@ int main(void)
    
    kmwaitkbd();
    // getchar();
+   
+   return 0;
 }
