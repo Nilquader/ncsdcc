@@ -144,6 +144,10 @@ void txtcuroff(void);
 /* displays the cursor on the screen */
 void txtcuron(void);
 
+
+/* returns the cursor position */
+void txtgetcursor(char *column, char *row);
+
 /* moves the cursor */
 void txtsetcursor(char column, char row);
 
@@ -155,9 +159,24 @@ void txtinverseon(void);
 void txtunderlineoff(void);
 void txtunderlineon(void);
 
+/* sends a character to the printer */
+char mcprintchar(char character);
+
+/* tests whether the printer is ready */
+char mcreadyprinter(void);
+
+/*  sets the printer type to be used by mcprintchar and mcreadyprinter */
+void mcsetprinter(char prntype); // prntype: 0=parallel, 1=serial
+
 /* displays the file selector (clears the screen first) */
 /* returns NULL if STOP pressed */
 char* selectfile(void);
+
+/* reads a character from the parallel port using Lapcat protocol */
+char lapcat_receive(char *character);
+
+/* sends a character to the parallel port using Lapcat protocol */
+char lapcat_send(char character);
 
 /* gets the firmware version number */
 int padgetversion(void);
