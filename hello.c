@@ -18,6 +18,14 @@ int main(void)
    SNDCHAL = 50;
    SNDCHAH = 30;
 
+   // test the printer
+   if(mcreadyprinter()) {
+     mcprintchar('A');
+     mcprintchar('\n');
+   }
+   
+   lapcat_receive(&row);
+   
    printf("Current Time: %s\n", dasciitime);
    txtsetcursor(1,1);
    printf("C on the Amstrad Notepad, Build %i\n", BUILD);
