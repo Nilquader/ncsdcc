@@ -1,6 +1,6 @@
-; char lapcat_receive(char *character);
-_lapcat_receive::
-	call 0xb8d8 ; lapcat_receive
+; char padinserial(char *character);
+_padinserial::
+	call 0xb85d ; padinserial
 	pop hl ; just add 2 to SP
 	pop hl
 	ld (hl), a ; store received character in receive pointer

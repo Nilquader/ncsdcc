@@ -144,7 +144,6 @@ void txtcuroff(void);
 /* displays the cursor on the screen */
 void txtcuron(void);
 
-
 /* returns the cursor position */
 void txtgetcursor(char *column, char *row);
 
@@ -168,6 +167,24 @@ char mcreadyprinter(void);
 /*  sets the printer type to be used by mcprintchar and mcreadyprinter */
 void mcsetprinter(char prntype); // prntype: 0=parallel, 1=serial
 
+/*  initialises the serial port using the global configured settings */
+void padinitserial(void);
+
+/* reads a character from the serial port */
+char padinserial(char *character);
+
+/* sends a character to the parallel port */
+char padoutparallel(char character);
+
+/* sends a character to the serial port */
+char padoutserial(char character);
+
+/* tests whether the parallel port is ready */
+char padreadyparallel(void);
+
+/*  tests whether the serial port is ready */
+char padreadyserial(void); 
+
 /* displays the file selector (clears the screen first) */
 /* returns NULL if STOP pressed */
 char* selectfile(void);
@@ -182,4 +199,3 @@ char lapcat_send(char character);
 int padgetversion(void);
 
 #endif /* __FIRMWARE_H */
-   

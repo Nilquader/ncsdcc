@@ -24,7 +24,8 @@ int main(void)
      mcprintchar('\n');
    }
    
-   lapcat_receive(&row);
+   // padinitserial();
+   if(padoutserial(row)) printf("Serial ready!\n");
    
    printf("Current Time: %s\n", dasciitime);
    txtsetcursor(1,1);

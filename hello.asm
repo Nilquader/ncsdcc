@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.0.0 #6037 (Jul 10 2011) (Mac OS X x86_64)
-; This file was generated Sat Aug 27 12:14:59 2011
+; This file was generated Thu Sep 15 00:12:15 2011
 ;--------------------------------------------------------
 	.module hello
 	.optsdcc -mz80
@@ -260,32 +260,71 @@ _main:
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-	ld	hl,#-22
+	ld	hl,#-26
 	add	hl,sp
 	ld	sp,hl
-;hello.c:14: eingabe[0] = 0; 
-	ld	hl,#0x0000
+;hello.c:15: eingabe[0] = 0; 
+	ld	hl,#0x0004
 	add	hl,sp
 	ld	c,l
 	ld	b,h
 	ld	(hl),#0x00
-;hello.c:15: firmver=padgetversion();
+;hello.c:16: firmver=padgetversion();
 	push	bc
 	call	_padgetversion
 	pop	bc
 	ld	-2 (ix),l
 	ld	-1 (ix),h
-;hello.c:17: SNDCHAL = 50;
+;hello.c:18: SNDCHAL = 50;
 	ld	a,#0x32
 	out	(_SNDCHAL),a
-;hello.c:18: SNDCHAH = 30;
+;hello.c:19: SNDCHAH = 30;
 	ld	a,#0x1E
 	out	(_SNDCHAH),a
-;hello.c:20: printf("Current Time: %s\n", dasciitime);
+;hello.c:22: if(mcreadyprinter()) {
+	push	bc
+	call	_mcreadyprinter
+	pop	bc
+	xor	a,a
+	or	a,l
+	jr	Z,00102$
+;hello.c:23: mcprintchar('A');
+	push	bc
+	ld	a,#0x41
+	push	af
+	inc	sp
+	call	_mcprintchar
+	inc	sp
+	ld	a,#0x0A
+	push	af
+	inc	sp
+	call	_mcprintchar
+	inc	sp
+	pop	bc
+00102$:
+;hello.c:28: if(padoutserial(row)) printf("Serial ready!\n");
+	push	bc
+	ld	a,-23 (ix)
+	push	af
+	inc	sp
+	call	_padoutserial
+	inc	sp
+	pop	bc
+	xor	a,a
+	or	a,l
+	jr	Z,00104$
+	push	bc
+	ld	hl,#__str_0
+	push	hl
+	call	_printf
+	pop	af
+	pop	bc
+00104$:
+;hello.c:30: printf("Current Time: %s\n", dasciitime);
 	push	bc
 	ld	hl,#_dasciitime
 	push	hl
-	ld	hl,#__str_0
+	ld	hl,#__str_1
 	push	hl
 	call	_printf
 	pop	af
@@ -294,14 +333,14 @@ _main:
 	call	_txtsetcursor
 	ld	hl,#0x0028
 	ex	(sp),hl
-	ld	hl,#__str_1
+	ld	hl,#__str_2
 	push	hl
 	call	_printf
 	pop	af
 	pop	af
 	call	_txtboldon
 	pop	bc
-;hello.c:24: printf("Your firmware version is: %i, mmu0 is %02X\n", firmver,copyofmmu0);
+;hello.c:34: printf("Your firmware version is: %i, mmu0 is %02X\n", firmver,copyofmmu0);
 	ld	hl,#_copyofmmu0 + 0
 	ld	e,(hl)
 	ld	d,#0x00
@@ -310,14 +349,14 @@ _main:
 	ld	l,-2 (ix)
 	ld	h,-1 (ix)
 	push	hl
-	ld	hl,#__str_2
+	ld	hl,#__str_3
 	push	hl
 	call	_printf
 	pop	af
 	pop	af
 	pop	af
 	call	_txtboldoff
-	ld	hl,#__str_3
+	ld	hl,#__str_4
 	push	hl
 	call	_printf
 	ld	hl,#0x0041
@@ -326,7 +365,7 @@ _main:
 	pop	af
 	call	_txtcuroff
 	pop	bc
-;hello.c:29: if (editbuf(eingabe, 20, EDITBUF_DOTTY))
+;hello.c:39: if (editbuf(eingabe, 20, EDITBUF_DOTTY))
 	push	bc
 	ld	hl,#0x4014
 	push	hl
@@ -337,34 +376,68 @@ _main:
 	pop	bc
 	xor	a,a
 	or	a,l
-	jr	Z,00102$
-;hello.c:31: printf("\nYour name is %s\n", eingabe);
+	jr	Z,00106$
+;hello.c:41: txtgetcursor(&col, &row);
+	ld	hl,#0x0003
+	add	hl,sp
+	ld	-26 (ix),l
+	ld	-25 (ix),h
+	ld	hl,#0x0002
+	add	hl,sp
+	ex	de,hl
 	push	bc
-	ld	hl,#__str_4
+	ld	l,-26 (ix)
+	ld	h,-25 (ix)
 	push	hl
-	call	_printf
+	push	de
+	call	_txtgetcursor
 	pop	af
 	pop	af
-	jr	00103$
-00102$:
-;hello.c:35: printf("\nOk, you're to shy!\n");
+	pop	bc
+;hello.c:42: printf("\nYour name is %s and the cursor was at (%i, %i)\n", eingabe, col, row);
+	ld	a,-23 (ix)
+	ld	-26 (ix),a
+	ld	a,-23 (ix)
+	rla	
+	sbc	a,a
+	ld	-25 (ix),a
+	ld	e,-24 (ix)
+	ld	a,-24 (ix)
+	rla	
+	sbc	a,a
+	ld	d,a
+	ld	l,-26 (ix)
+	ld	h,-25 (ix)
+	push	hl
+	push	de
+	push	bc
 	ld	hl,#__str_5
 	push	hl
 	call	_printf
 	pop	af
-00103$:
-;hello.c:37: txtcuron();
-	call	_txtcuron
-;hello.c:38: getchar();
-	call	_getchar
-;hello.c:40: txtclearwindow();
-	call	_txtclearwindow
-;hello.c:41: printf("\nPress any key to continue");
+	pop	af
+	pop	af
+	pop	af
+	jr	00107$
+00106$:
+;hello.c:46: printf("\nOk, you're to shy!\n");
 	ld	hl,#__str_6
 	push	hl
 	call	_printf
 	pop	af
-;hello.c:42: kmsettickcount(0,0);
+00107$:
+;hello.c:48: txtcuron();
+	call	_txtcuron
+;hello.c:49: getchar();
+	call	_getchar
+;hello.c:51: txtclearwindow();
+	call	_txtclearwindow
+;hello.c:52: printf("\nPress any key to continue");
+	ld	hl,#__str_7
+	push	hl
+	call	_printf
+	pop	af
+;hello.c:53: kmsettickcount(0,0);
 	ld	hl,#0x0000
 	push	hl
 	ld	l, #0x00
@@ -372,83 +445,89 @@ _main:
 	call	_kmsettickcount
 	pop	af
 	pop	af
-;hello.c:43: kmwaitkbd();
+;hello.c:54: kmwaitkbd();
 	call	_kmwaitkbd
-;hello.c:44: col1();
+;hello.c:55: col1();
 	call	_col1
-;hello.c:45: printf("Press a key to quit!");
-	ld	hl,#__str_7
-	push	hl
-	call	_printf
-	pop	af
-;hello.c:46: kmwaitkbd();
-	call	_kmwaitkbd
-;hello.c:47: file = selectfile();
-	call	_selectfile
-	ld	c,l
-	ld	b,h
-;hello.c:48: if (file == NULL) {
-	ld	a,c
-	or	a,b
-	jr	NZ,00105$
-;hello.c:49: printf("Don't you want to view a file?\n");
+;hello.c:56: printf("Press a key to quit!");
 	ld	hl,#__str_8
 	push	hl
 	call	_printf
 	pop	af
-	jr	00106$
-00105$:
-;hello.c:51: printf("Your file was %s!\n", file);
-	push	bc
+;hello.c:57: kmwaitkbd();
+	call	_kmwaitkbd
+;hello.c:58: file = selectfile();
+	call	_selectfile
+	ld	c,l
+	ld	b,h
+;hello.c:59: if (file == NULL) {
+	ld	a,c
+	or	a,b
+	jr	NZ,00109$
+;hello.c:60: printf("Don't you want to view a file?\n");
 	ld	hl,#__str_9
 	push	hl
 	call	_printf
 	pop	af
+	jr	00110$
+00109$:
+;hello.c:62: printf("Your file was %s!\n", file);
+	push	bc
+	ld	hl,#__str_10
+	push	hl
+	call	_printf
 	pop	af
-00106$:
-;hello.c:54: kmwaitkbd();
+	pop	af
+00110$:
+;hello.c:65: kmwaitkbd();
 	call	_kmwaitkbd
+;hello.c:68: return 0;
+	ld	hl,#0x0000
 	ld	sp,ix
 	pop	ix
 	ret
 _main_end::
 __str_0:
-	.ascii "Current Time: %s"
+	.ascii "Serial ready!"
 	.db 0x0A
 	.db 0x00
 __str_1:
-	.ascii "C on the Amstrad Notepad, Build %i"
+	.ascii "Current Time: %s"
 	.db 0x0A
 	.db 0x00
 __str_2:
-	.ascii "Your firmware version is: %i, mmu0 is %02X"
+	.ascii "C on the Amstrad Notepad, Build %i"
 	.db 0x0A
 	.db 0x00
 __str_3:
-	.ascii "Please enter your name:"
+	.ascii "Your firmware version is: %i, mmu0 is %02X"
+	.db 0x0A
 	.db 0x00
 __str_4:
-	.db 0x0A
-	.ascii "Your name is %s"
-	.db 0x0A
+	.ascii "Please enter your name:"
 	.db 0x00
 __str_5:
 	.db 0x0A
-	.ascii "Ok, you're to shy!"
+	.ascii "Your name is %s and the cursor was at (%i, %i)"
 	.db 0x0A
 	.db 0x00
 __str_6:
 	.db 0x0A
-	.ascii "Press any key to continue"
+	.ascii "Ok, you're to shy!"
+	.db 0x0A
 	.db 0x00
 __str_7:
-	.ascii "Press a key to quit!"
+	.db 0x0A
+	.ascii "Press any key to continue"
 	.db 0x00
 __str_8:
+	.ascii "Press a key to quit!"
+	.db 0x00
+__str_9:
 	.ascii "Don't you want to view a file?"
 	.db 0x0A
 	.db 0x00
-__str_9:
+__str_10:
 	.ascii "Your file was %s!"
 	.db 0x0A
 	.db 0x00

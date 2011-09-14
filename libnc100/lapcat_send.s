@@ -5,5 +5,5 @@ _lapcat_send::
 	ld a,(hl) ; get character from stack
 	call 0xB8DB ; lapcat_send
 	ld l, #0
-	rlc l ; rotate carry into l (return value)
+	rl l ; rotate carry into l (return value)
 	ret
