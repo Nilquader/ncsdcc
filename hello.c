@@ -3,14 +3,14 @@
 #include "libnc100/nc100.h"
 #include "libnc100/firmware.h"
 
-#define BUILD 40
+#define BUILD 41
 
 int main(void)
 {
    int firmver;
    char eingabe[20];
    char *file;
-   char row, col;
+   char row, col, row2, col2;
 
    eingabe[0] = 0; 
    firmver=padgetversion();
@@ -18,14 +18,16 @@ int main(void)
    SNDCHAL = 50;
    SNDCHAH = 30;
 
-   // test the printer
-   if(mcreadyprinter()) {
-     mcprintchar('A');
-     mcprintchar('\n');
+   
+   // txtsetwindow(10,1,50,6);
+   if(txtgetwindow(&col, &row, &col2, &row2))
+   {
+     printf("The window coordinates are (%i,%i) - (%i,%i)\n", col, row, col2, row2);
    }
    
-   // padinitserial();
-   if(padoutserial(row)) printf("Serial ready!\n");
+   
+   txtoutput(65);
+   txtwrchar(66);
    
    printf("Current Time: %s\n", dasciitime);
    txtsetcursor(1,1);

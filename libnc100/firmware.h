@@ -147,8 +147,21 @@ void txtcuron(void);
 /* returns the cursor position */
 void txtgetcursor(char *column, char *row);
 
+/* returns the window coordinates */
+/* returns 0 if window is whole screen, 1 if a smaller window */
+char txtgetwindow(char* left, char* top, char* right, char* bottom);
+
+/* displays a character or acts on control codes */
+void txtoutput(char character);
+
 /* moves the cursor */
 void txtsetcursor(char column, char row);
+
+/* defines a new window */
+void txtsetwindow(char left, char top, char right, char bottom);
+
+/* displays a character. All values displayed (PC char. set) */
+void txtwrchar(char character);
 
 /* enable or disable various display attributes */
 void txtboldoff(void);

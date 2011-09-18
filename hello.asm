@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.0.0 #6037 (Jul 10 2011) (Mac OS X x86_64)
-; This file was generated Thu Sep 15 00:12:15 2011
+; This file was generated Sun Sep 18 23:30:38 2011
 ;--------------------------------------------------------
 	.module hello
 	.optsdcc -mz80
@@ -260,11 +260,11 @@ _main:
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-	ld	hl,#-26
+	ld	hl,#-32
 	add	hl,sp
 	ld	sp,hl
 ;hello.c:15: eingabe[0] = 0; 
-	ld	hl,#0x0004
+	ld	hl,#0x000A
 	add	hl,sp
 	ld	c,l
 	ld	b,h
@@ -281,47 +281,97 @@ _main:
 ;hello.c:19: SNDCHAH = 30;
 	ld	a,#0x1E
 	out	(_SNDCHAH),a
-;hello.c:22: if(mcreadyprinter()) {
+;hello.c:23: if(txtgetwindow(&col, &row, &col2, &row2))
+	ld	hl,#0x0007
+	add	hl,sp
+	ld	-28 (ix),l
+	ld	-27 (ix),h
+	ld	hl,#0x0006
+	add	hl,sp
+	ld	-30 (ix),l
+	ld	-29 (ix),h
+	ld	hl,#0x0009
+	add	hl,sp
+	ld	-32 (ix),l
+	ld	-31 (ix),h
+	ld	hl,#0x0008
+	add	hl,sp
+	ex	de,hl
 	push	bc
-	call	_mcreadyprinter
+	ld	l,-28 (ix)
+	ld	h,-27 (ix)
+	push	hl
+	ld	l,-30 (ix)
+	ld	h,-29 (ix)
+	push	hl
+	ld	l,-32 (ix)
+	ld	h,-31 (ix)
+	push	hl
+	push	de
+	call	_txtgetwindow
+	pop	af
+	pop	af
+	pop	af
+	pop	af
 	pop	bc
 	xor	a,a
 	or	a,l
 	jr	Z,00102$
-;hello.c:23: mcprintchar('A');
+;hello.c:25: printf("The window coordinates are (%i,%i) - (%i,%i)\n", col, row, col2, row2);
+	ld	a,-25 (ix)
+	ld	-32 (ix),a
+	ld	a,-25 (ix)
+	rla	
+	sbc	a,a
+	ld	-31 (ix),a
+	ld	a,-26 (ix)
+	ld	-30 (ix),a
+	ld	a,-26 (ix)
+	rla	
+	sbc	a,a
+	ld	-29 (ix),a
+	ld	a,-23 (ix)
+	ld	-28 (ix),a
+	ld	a,-23 (ix)
+	rla	
+	sbc	a,a
+	ld	-27 (ix),a
+	ld	e,-24 (ix)
+	ld	a,-24 (ix)
+	rla	
+	sbc	a,a
+	ld	d,a
+	push	bc
+	ld	l,-32 (ix)
+	ld	h,-31 (ix)
+	push	hl
+	ld	l,-30 (ix)
+	ld	h,-29 (ix)
+	push	hl
+	ld	l,-28 (ix)
+	ld	h,-27 (ix)
+	push	hl
+	push	de
+	ld	hl,#__str_0
+	push	hl
+	call	_printf
+	ld	hl,#0x000A
+	add	hl,sp
+	ld	sp,hl
+	pop	bc
+00102$:
+;hello.c:29: txtoutput(65);
 	push	bc
 	ld	a,#0x41
 	push	af
 	inc	sp
-	call	_mcprintchar
+	call	_txtoutput
 	inc	sp
-	ld	a,#0x0A
+	ld	a,#0x42
 	push	af
 	inc	sp
-	call	_mcprintchar
+	call	_txtwrchar
 	inc	sp
-	pop	bc
-00102$:
-;hello.c:28: if(padoutserial(row)) printf("Serial ready!\n");
-	push	bc
-	ld	a,-23 (ix)
-	push	af
-	inc	sp
-	call	_padoutserial
-	inc	sp
-	pop	bc
-	xor	a,a
-	or	a,l
-	jr	Z,00104$
-	push	bc
-	ld	hl,#__str_0
-	push	hl
-	call	_printf
-	pop	af
-	pop	bc
-00104$:
-;hello.c:30: printf("Current Time: %s\n", dasciitime);
-	push	bc
 	ld	hl,#_dasciitime
 	push	hl
 	ld	hl,#__str_1
@@ -331,7 +381,7 @@ _main:
 	ld	hl,#0x0101
 	ex	(sp),hl
 	call	_txtsetcursor
-	ld	hl,#0x0028
+	ld	hl,#0x0029
 	ex	(sp),hl
 	ld	hl,#__str_2
 	push	hl
@@ -340,7 +390,7 @@ _main:
 	pop	af
 	call	_txtboldon
 	pop	bc
-;hello.c:34: printf("Your firmware version is: %i, mmu0 is %02X\n", firmver,copyofmmu0);
+;hello.c:36: printf("Your firmware version is: %i, mmu0 is %02X\n", firmver,copyofmmu0);
 	ld	hl,#_copyofmmu0 + 0
 	ld	e,(hl)
 	ld	d,#0x00
@@ -365,7 +415,7 @@ _main:
 	pop	af
 	call	_txtcuroff
 	pop	bc
-;hello.c:39: if (editbuf(eingabe, 20, EDITBUF_DOTTY))
+;hello.c:41: if (editbuf(eingabe, 20, EDITBUF_DOTTY))
 	push	bc
 	ld	hl,#0x4014
 	push	hl
@@ -376,38 +426,38 @@ _main:
 	pop	bc
 	xor	a,a
 	or	a,l
-	jr	Z,00106$
-;hello.c:41: txtgetcursor(&col, &row);
-	ld	hl,#0x0003
+	jr	Z,00104$
+;hello.c:43: txtgetcursor(&col, &row);
+	ld	hl,#0x0009
 	add	hl,sp
-	ld	-26 (ix),l
-	ld	-25 (ix),h
-	ld	hl,#0x0002
+	ld	-32 (ix),l
+	ld	-31 (ix),h
+	ld	hl,#0x0008
 	add	hl,sp
 	ex	de,hl
 	push	bc
-	ld	l,-26 (ix)
-	ld	h,-25 (ix)
+	ld	l,-32 (ix)
+	ld	h,-31 (ix)
 	push	hl
 	push	de
 	call	_txtgetcursor
 	pop	af
 	pop	af
 	pop	bc
-;hello.c:42: printf("\nYour name is %s and the cursor was at (%i, %i)\n", eingabe, col, row);
+;hello.c:44: printf("\nYour name is %s and the cursor was at (%i, %i)\n", eingabe, col, row);
 	ld	a,-23 (ix)
-	ld	-26 (ix),a
+	ld	-32 (ix),a
 	ld	a,-23 (ix)
 	rla	
 	sbc	a,a
-	ld	-25 (ix),a
+	ld	-31 (ix),a
 	ld	e,-24 (ix)
 	ld	a,-24 (ix)
 	rla	
 	sbc	a,a
 	ld	d,a
-	ld	l,-26 (ix)
-	ld	h,-25 (ix)
+	ld	l,-32 (ix)
+	ld	h,-31 (ix)
 	push	hl
 	push	de
 	push	bc
@@ -418,26 +468,26 @@ _main:
 	pop	af
 	pop	af
 	pop	af
-	jr	00107$
-00106$:
-;hello.c:46: printf("\nOk, you're to shy!\n");
+	jr	00105$
+00104$:
+;hello.c:48: printf("\nOk, you're to shy!\n");
 	ld	hl,#__str_6
 	push	hl
 	call	_printf
 	pop	af
-00107$:
-;hello.c:48: txtcuron();
+00105$:
+;hello.c:50: txtcuron();
 	call	_txtcuron
-;hello.c:49: getchar();
+;hello.c:51: getchar();
 	call	_getchar
-;hello.c:51: txtclearwindow();
+;hello.c:53: txtclearwindow();
 	call	_txtclearwindow
-;hello.c:52: printf("\nPress any key to continue");
+;hello.c:54: printf("\nPress any key to continue");
 	ld	hl,#__str_7
 	push	hl
 	call	_printf
 	pop	af
-;hello.c:53: kmsettickcount(0,0);
+;hello.c:55: kmsettickcount(0,0);
 	ld	hl,#0x0000
 	push	hl
 	ld	l, #0x00
@@ -445,50 +495,50 @@ _main:
 	call	_kmsettickcount
 	pop	af
 	pop	af
-;hello.c:54: kmwaitkbd();
+;hello.c:56: kmwaitkbd();
 	call	_kmwaitkbd
-;hello.c:55: col1();
+;hello.c:57: col1();
 	call	_col1
-;hello.c:56: printf("Press a key to quit!");
+;hello.c:58: printf("Press a key to quit!");
 	ld	hl,#__str_8
 	push	hl
 	call	_printf
 	pop	af
-;hello.c:57: kmwaitkbd();
+;hello.c:59: kmwaitkbd();
 	call	_kmwaitkbd
-;hello.c:58: file = selectfile();
+;hello.c:60: file = selectfile();
 	call	_selectfile
 	ld	c,l
 	ld	b,h
-;hello.c:59: if (file == NULL) {
+;hello.c:61: if (file == NULL) {
 	ld	a,c
 	or	a,b
-	jr	NZ,00109$
-;hello.c:60: printf("Don't you want to view a file?\n");
+	jr	NZ,00107$
+;hello.c:62: printf("Don't you want to view a file?\n");
 	ld	hl,#__str_9
 	push	hl
 	call	_printf
 	pop	af
-	jr	00110$
-00109$:
-;hello.c:62: printf("Your file was %s!\n", file);
+	jr	00108$
+00107$:
+;hello.c:64: printf("Your file was %s!\n", file);
 	push	bc
 	ld	hl,#__str_10
 	push	hl
 	call	_printf
 	pop	af
 	pop	af
-00110$:
-;hello.c:65: kmwaitkbd();
+00108$:
+;hello.c:67: kmwaitkbd();
 	call	_kmwaitkbd
-;hello.c:68: return 0;
+;hello.c:70: return 0;
 	ld	hl,#0x0000
 	ld	sp,ix
 	pop	ix
 	ret
 _main_end::
 __str_0:
-	.ascii "Serial ready!"
+	.ascii "The window coordinates are (%i,%i) - (%i,%i)"
 	.db 0x0A
 	.db 0x00
 __str_1:
