@@ -1,8 +1,8 @@
 ; char txtgetwindow(char* left, char* top, char* right, char* bottom);
 _txtgetwindow::
 	call 0xb830 ; txtgetwindow
-	rla 
-	and #0xfe ; store carry to a (return value)	
+	ld a, #0x00
+	rla ; store carry to a (return value)
 	ld b, h ; save HL to BC
 	ld c, l
 	pop hl ; adds 2 to SP
