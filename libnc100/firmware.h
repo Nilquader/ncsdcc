@@ -18,6 +18,16 @@
 #define EDITBUF_FORCE 32
 #define EDITBUF_DOTTY 64
 
+// defines time/date structure for all firmware calls dealing with time
+struct padtime{
+  unsigned int year;
+  unsigned char month;
+  unsigned char date;
+  unsigned char hour;
+  unsigned char minute;
+  unsigned char second;
+};
+
 // Firmware System Variables
 volatile __at(0xb000) unsigned char copyofmmu0;
 volatile __at(0xb001) unsigned char copyofmmu1;
@@ -197,6 +207,18 @@ char padreadyparallel(void);
 
 /*  tests whether the serial port is ready */
 char padreadyserial(void); 
+
+/* turns off the UART and 4711 */
+void padresetserial(void);
+
+/* tests whether there is a character waiting to be read from the serial port */
+char padserialwaiting(void);
+
+/* returns the address of a 4 byte 100Hz ticker */
+long* padgetticker(void);
+
+/* reads the time and date from the RTC */
+void padgettime(struct padtime* rtctime);
 
 /* displays the file selector (clears the screen first) */
 /* returns NULL if STOP pressed */

@@ -11,6 +11,8 @@ int main(void)
    char eingabe[20];
    char *file;
    char row, col, row2, col2;
+   long int *ticker;
+   struct padtime mytime;
 
    eingabe[0] = 0; 
    firmver=padgetversion();
@@ -18,7 +20,17 @@ int main(void)
    SNDCHAL = 50;
    SNDCHAH = 30;
 
+   ticker = padgetticker();
+   printf("Ticker is: %li\n", *ticker);
    
+   padgettime(&mytime);
+   printf("Address is: %u\n", (unsigned int)mytime);
+   printf("Date: %i.%i. Time is %i:%i:%i\n", mytime.month, mytime.date, mytime.hour, mytime.minute, mytime.second);
+
+   if (padserialwaiting()) printf("Serial data waiting...\n");   
+
+   getchar();
+
    // txtsetwindow(10,1,50,6);
    if(txtgetwindow(&col, &row, &col2, &row2))
    {
