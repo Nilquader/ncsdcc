@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.0.0 #6037 (Jul 10 2011) (Mac OS X x86_64)
-; This file was generated Mon Sep 26 00:48:30 2011
+; This file was generated Fri Jan 27 12:41:07 2012
 ;--------------------------------------------------------
 	.module hello
 	.optsdcc -mz80
@@ -260,52 +260,48 @@ _main:
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-	ld	hl,#-41
+	ld	hl,#-38
 	add	hl,sp
 	ld	sp,hl
-;hello.c:17: eingabe[0] = 0; 
-	ld	hl,#0x0013
+;hello.c:18: eingabe[0] = 0; 
+	ld	hl,#0x0012
 	add	hl,sp
-	ld	-35 (ix),l
-	ld	-34 (ix),h
 	ld	(hl),#0x00
-;hello.c:18: firmver=padgetversion();
+;hello.c:19: firmver=padgetversion();
 	call	_padgetversion
-	ld	-2 (ix),l
-	ld	-1 (ix),h
-;hello.c:20: SNDCHAL = 50;
+;hello.c:21: SNDCHAL = 50;
 	ld	a,#0x32
 	out	(_SNDCHAL),a
-;hello.c:21: SNDCHAH = 30;
+;hello.c:22: SNDCHAH = 30;
 	ld	a,#0x1E
 	out	(_SNDCHAH),a
-;hello.c:23: ticker = padgetticker();
+;hello.c:24: ticker = padgetticker();
 	call	_padgetticker
-;hello.c:24: printf("Ticker is: %li\n", *ticker);
-	ld	e,(hl)
-	inc	hl
-	ld	d,(hl)
-	inc	hl
+;hello.c:25: printf("Ticker is: %li\n", *ticker);
 	ld	c,(hl)
 	inc	hl
+	ld	b,(hl)
+	inc	hl
+	ld	e,(hl)
+	inc	hl
 	ld	h, (hl)
-	ld	l, c
+	ld	l, e
 	push	hl
-	push	de
+	push	bc
 	ld	hl,#__str_0
 	push	hl
 	call	_printf
 	pop	af
 	pop	af
 	pop	af
-;hello.c:26: padgettime(&mytime);
-	ld	hl,#0x0008
+;hello.c:27: padgettime(&mytime);
+	ld	hl,#0x0007
 	add	hl,sp
 	push	hl
 	call	_padgettime
 	pop	af
-;hello.c:27: printf("Address is: %u\n", (unsigned int)mytime);
-	ld	hl,#0x0008
+;hello.c:28: printf("Address is: %u\n", (unsigned int)mytime);
+	ld	hl,#0x0007
 	add	hl,sp
 	push	hl
 	ld	hl,#__str_1
@@ -313,26 +309,26 @@ _main:
 	call	_printf
 	pop	af
 	pop	af
-;hello.c:28: printf("Date: %i.%i. Time is %i:%i:%i\n", mytime.month, mytime.date, mytime.hour, mytime.minute, mytime.second);
-	ld	hl,#0x0008
+;hello.c:29: printf("Date: %i.%i. Time is %i:%i:%i\n", mytime.month, mytime.date, mytime.hour, mytime.minute, mytime.second);
+	ld	hl,#0x0007
 	add	hl,sp
 	ld	c,l
 	ld	b,h
 	ld	hl,#0x0006
 	add	hl,bc
 	ld	a,(hl)
-	ld	-37 (ix), a
-	ld	-36 (ix),#0x00
+	ld	-34 (ix), a
+	ld	-33 (ix),#0x00
 	ld	hl,#0x0005
 	add	hl,bc
 	ld	a,(hl)
-	ld	-39 (ix), a
-	ld	-38 (ix),#0x00
+	ld	-36 (ix), a
+	ld	-35 (ix),#0x00
 	ld	hl,#0x0004
 	add	hl,bc
 	ld	a,(hl)
-	ld	-41 (ix), a
-	ld	-40 (ix),#0x00
+	ld	-38 (ix), a
+	ld	-37 (ix),#0x00
 	ld	hl,#0x0003
 	add	hl,bc
 	ld	e, (hl)
@@ -342,14 +338,14 @@ _main:
 	ld	a,(bc)
 	ld	c, a
 	ld	b,#0x00
-	ld	l,-37 (ix)
-	ld	h,-36 (ix)
+	ld	l,-34 (ix)
+	ld	h,-33 (ix)
 	push	hl
-	ld	l,-39 (ix)
-	ld	h,-38 (ix)
+	ld	l,-36 (ix)
+	ld	h,-35 (ix)
 	push	hl
-	ld	l,-41 (ix)
-	ld	h,-40 (ix)
+	ld	l,-38 (ix)
+	ld	h,-37 (ix)
 	push	hl
 	push	de
 	push	bc
@@ -359,263 +355,44 @@ _main:
 	ld	hl,#0x000C
 	add	hl,sp
 	ld	sp,hl
-;hello.c:30: if (padserialwaiting()) printf("Serial data waiting...\n");   
+;hello.c:33: while(!padserialwaiting());
+00101$:
 	call	_padserialwaiting
 	xor	a,a
 	or	a,l
-	jr	Z,00102$
+	jr	Z,00101$
+;hello.c:34: printf("Serial data waiting...\n");   
 	ld	hl,#__str_3
 	push	hl
 	call	_printf
 	pop	af
-00102$:
-;hello.c:32: getchar();
-	call	_getchar
-;hello.c:35: if(txtgetwindow(&col, &row, &col2, &row2))
-	ld	hl,#0x0010
+;hello.c:35: padinserial(&seribyte);
+	ld	hl,#0x0006
 	add	hl,sp
-	ld	c,l
-	ld	b,h
-	ld	hl,#0x000F
-	add	hl,sp
-	ld	-41 (ix),l
-	ld	-40 (ix),h
-	ld	hl,#0x0012
-	add	hl,sp
-	ld	-39 (ix),l
-	ld	-38 (ix),h
-	ld	hl,#0x0011
-	add	hl,sp
-	ex	de,hl
-	push	bc
-	ld	l,-41 (ix)
-	ld	h,-40 (ix)
 	push	hl
-	ld	l,-39 (ix)
-	ld	h,-38 (ix)
-	push	hl
-	push	de
-	call	_txtgetwindow
+	call	_padinserial
 	pop	af
-	pop	af
-	pop	af
-	pop	af
-	xor	a,a
-	or	a,l
-	jr	Z,00104$
-;hello.c:37: printf("The window coordinates are (%i,%i) - (%i,%i)\n", col, row, col2, row2);
-	ld	c,-25 (ix)
-	ld	a,-25 (ix)
+;hello.c:36: printf("Byte: %02x\n", seribyte);
+	ld	c,-32 (ix)
+	ld	a,-32 (ix)
 	rla	
 	sbc	a,a
 	ld	b,a
-	ld	a,-26 (ix)
-	ld	-41 (ix),a
-	ld	a,-26 (ix)
-	rla	
-	sbc	a,a
-	ld	-40 (ix),a
-	ld	a,-23 (ix)
-	ld	-39 (ix),a
-	ld	a,-23 (ix)
-	rla	
-	sbc	a,a
-	ld	-38 (ix),a
-	ld	e,-24 (ix)
-	ld	a,-24 (ix)
-	rla	
-	sbc	a,a
-	ld	d,a
 	push	bc
-	ld	l,-41 (ix)
-	ld	h,-40 (ix)
-	push	hl
-	ld	l,-39 (ix)
-	ld	h,-38 (ix)
-	push	hl
-	push	de
 	ld	hl,#__str_4
 	push	hl
 	call	_printf
-	ld	hl,#0x000A
-	add	hl,sp
-	ld	sp,hl
-00104$:
-;hello.c:41: txtoutput(65);
-	ld	a,#0x41
+	pop	af
+	pop	af
+;hello.c:37: padoutserial(seribyte + 1);
+	ld	a,-32 (ix)
+	inc	a
 	push	af
 	inc	sp
-	call	_txtoutput
+	call	_padoutserial
 	inc	sp
-;hello.c:42: txtwrchar(66);
-	ld	a,#0x42
-	push	af
-	inc	sp
-	call	_txtwrchar
-	inc	sp
-;hello.c:44: printf("Current Time: %s\n", dasciitime);
-	ld	hl,#_dasciitime
-	push	hl
-	ld	hl,#__str_5
-	push	hl
-	call	_printf
-	pop	af
-;hello.c:45: txtsetcursor(1,1);
-	ld	hl,#0x0101
-	ex	(sp),hl
-	call	_txtsetcursor
-;hello.c:46: printf("C on the Amstrad Notepad, Build %i\n", BUILD);
-	ld	hl,#0x0029
-	ex	(sp),hl
-	ld	hl,#__str_6
-	push	hl
-	call	_printf
-	pop	af
-	pop	af
-;hello.c:47: txtboldon();
-	call	_txtboldon
-;hello.c:48: printf("Your firmware version is: %i, mmu0 is %02X\n", firmver,copyofmmu0);
-	ld	hl,#_copyofmmu0 + 0
-	ld	c,(hl)
-	ld	b,#0x00
-	push	bc
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
-	push	hl
-	ld	hl,#__str_7
-	push	hl
-	call	_printf
-	pop	af
-	pop	af
-	pop	af
-;hello.c:49: txtboldoff();
-	call	_txtboldoff
-;hello.c:50: printf("Please enter your name:");
-	ld	hl,#__str_8
-	push	hl
-	call	_printf
-;hello.c:51: kmcharreturn(65);
-	ld	hl,#0x0041
-	ex	(sp),hl
-	call	_kmcharreturn
-	pop	af
-;hello.c:52: txtcuroff();
-	call	_txtcuroff
-;hello.c:53: if (editbuf(eingabe, 20, EDITBUF_DOTTY))
-	ld	hl,#0x4014
-	push	hl
-	ld	l,-35 (ix)
-	ld	h,-34 (ix)
-	push	hl
-	call	_editbuf
-	pop	af
-	pop	af
-	xor	a,a
-	or	a,l
-	jr	Z,00106$
-;hello.c:55: txtgetcursor(&col, &row);
-	ld	hl,#0x0012
-	add	hl,sp
-	ld	c,l
-	ld	b,h
-	ld	hl,#0x0011
-	add	hl,sp
-	push	bc
-	push	hl
-	call	_txtgetcursor
-	pop	af
-	pop	af
-;hello.c:56: printf("\nYour name is %s and the cursor was at (%i, %i)\n", eingabe, col, row);
-	ld	c,-23 (ix)
-	ld	a,-23 (ix)
-	rla	
-	sbc	a,a
-	ld	b,a
-	ld	e,-24 (ix)
-	ld	a,-24 (ix)
-	rla	
-	sbc	a,a
-	ld	d,a
-	push	bc
-	push	de
-	ld	l,-35 (ix)
-	ld	h,-34 (ix)
-	push	hl
-	ld	hl,#__str_9
-	push	hl
-	call	_printf
-	pop	af
-	pop	af
-	pop	af
-	pop	af
-	jr	00107$
-00106$:
-;hello.c:60: printf("\nOk, you're to shy!\n");
-	ld	hl,#__str_10
-	push	hl
-	call	_printf
-	pop	af
-00107$:
-;hello.c:62: txtcuron();
-	call	_txtcuron
-;hello.c:63: getchar();
-	call	_getchar
-;hello.c:65: txtclearwindow();
-	call	_txtclearwindow
-;hello.c:66: printf("\nPress any key to continue");
-	ld	hl,#__str_11
-	push	hl
-	call	_printf
-	pop	af
-;hello.c:67: kmsettickcount(0,0);
-	ld	hl,#0x0000
-	push	hl
-	ld	l, #0x00
-	push	hl
-	call	_kmsettickcount
-	pop	af
-	pop	af
-;hello.c:68: kmwaitkbd();
-	call	_kmwaitkbd
-;hello.c:69: col1();
-	call	_col1
-;hello.c:70: printf("Press a key to quit!");
-	ld	hl,#__str_12
-	push	hl
-	call	_printf
-	pop	af
-;hello.c:71: kmwaitkbd();
-	call	_kmwaitkbd
-;hello.c:72: file = selectfile();
-	call	_selectfile
-	ld	c,l
-	ld	b,h
-;hello.c:73: if (file == NULL) {
-	ld	a,c
-	or	a,b
-	jr	NZ,00109$
-;hello.c:74: printf("Don't you want to view a file?\n");
-	ld	hl,#__str_13
-	push	hl
-	call	_printf
-	pop	af
-	jr	00110$
-00109$:
-;hello.c:76: printf("Your file was %s!\n", file);
-	push	bc
-	ld	hl,#__str_14
-	push	hl
-	call	_printf
-	pop	af
-	pop	af
-00110$:
-;hello.c:79: kmwaitkbd();
-	call	_kmwaitkbd
-;hello.c:82: return 0;
-	ld	hl,#0x0000
-	ld	sp,ix
-	pop	ix
-	ret
+;hello.c:90: return 0;
+	jr	00101$
 _main_end::
 __str_0:
 	.ascii "Ticker is: %li"
@@ -634,46 +411,50 @@ __str_3:
 	.db 0x0A
 	.db 0x00
 __str_4:
-	.ascii "The window coordinates are (%i,%i) - (%i,%i)"
+	.ascii "Byte: %02x"
 	.db 0x0A
 	.db 0x00
 __str_5:
-	.ascii "Current Time: %s"
+	.ascii "The window coordinates are (%i,%i) - (%i,%i)"
 	.db 0x0A
 	.db 0x00
 __str_6:
-	.ascii "C on the Amstrad Notepad, Build %i"
+	.ascii "Current Time: %s"
 	.db 0x0A
 	.db 0x00
 __str_7:
-	.ascii "Your firmware version is: %i, mmu0 is %02X"
+	.ascii "C on the Amstrad Notepad, Build %i"
 	.db 0x0A
 	.db 0x00
 __str_8:
-	.ascii "Please enter your name:"
+	.ascii "Your firmware version is: %i, mmu0 is %02X"
+	.db 0x0A
 	.db 0x00
 __str_9:
+	.ascii "Please enter your name:"
+	.db 0x00
+__str_10:
 	.db 0x0A
 	.ascii "Your name is %s and the cursor was at (%i, %i)"
 	.db 0x0A
 	.db 0x00
-__str_10:
+__str_11:
 	.db 0x0A
 	.ascii "Ok, you're to shy!"
 	.db 0x0A
 	.db 0x00
-__str_11:
+__str_12:
 	.db 0x0A
 	.ascii "Press any key to continue"
 	.db 0x00
-__str_12:
+__str_13:
 	.ascii "Press a key to quit!"
 	.db 0x00
-__str_13:
+__str_14:
 	.ascii "Don't you want to view a file?"
 	.db 0x0A
 	.db 0x00
-__str_14:
+__str_15:
 	.ascii "Your file was %s!"
 	.db 0x0A
 	.db 0x00

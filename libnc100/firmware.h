@@ -18,7 +18,7 @@
 #define EDITBUF_FORCE 32
 #define EDITBUF_DOTTY 64
 
-// defines time/date structure for all firmware calls dealing with time
+// defines time/date structures for all firmware calls dealing with time
 struct padtime{
   unsigned int year;
   unsigned char month;
@@ -26,6 +26,19 @@ struct padtime{
   unsigned char hour;
   unsigned char minute;
   unsigned char second;
+};
+
+struct padalarm{
+  unsigned char date;
+  unsigned char hour;
+  unsigned char minute;
+};
+
+// defines file info structure for findfirst/findnext
+struct fileinfo{
+  char filename[12];
+  char attribute;
+  unsigned short size;
 };
 
 // Firmware System Variables
@@ -220,9 +233,102 @@ long* padgetticker(void);
 /* reads the time and date from the RTC */
 void padgettime(struct padtime* rtctime);
 
+/* sets the ALARM date and time (within next month) */
+void padsetalarm(struct padalarm* alarm); // missing
+
+/* sets the RTC date and time */
+void padsettime(struct padtime* rtctime); // missing
+
+/* obtains the address of a memory block for a given memory handle */
+void* heapaddress(int handle); // missing
+
+/* allocates a block of memory from the heap */
+int heapalloc(unsigned short size); // missing
+
+/* frees a block of memory */
+void heapfree(int handle); // missing
+
+/* locks or unlocks a memory block */
+void heaplock(int handle, char lock); // missing
+
+/* returns the largest block size that can be allocated */
+unsigned short heapmaxfree(void); // missing
+
+/* changes the size of an allocated memory block */
+int heaprealloc(int handle, unsigned short newsize); // missing
+
+/* closes a file */
+char fclose(int handle); // missing
+
+/* erases a file */
+char ferase(char* filename); // missing
+
+/* reads a block from a file */
+unsigned short finblock(int handle, char *buffer, unsigned short size); // missing
+
+/* reads a byte from a file */
+char finchar(int handle, char *byte); // missing
+
+/* finds first file. setdta must have been called first */
+struct fileinfo* findfirst(void); // missing
+
+/* finds next file. findfirst must have been called first */
+struct fileinfo* findnext(void); // missing
+
+/* opens a file for input */
+int fopenin(char *filename); // missing
+
+/* opens a file for output */
+int fopenout(char *filename); // missing
+
+/* opens a file for input and output */
+int fopenup(char *filename); // missing
+
+/* writes a block to a file */
+unsigned short foutblock(int handle, char* buffer, unsigned short size); // missing
+
+/* writes a byte to a file */
+char foutchar(int handle, char byte); // missing
+
+/* renames a file */
+char frename(char *oldname, char* newname); // missing
+
+/* moves the file pointer to a position within a file */
+char fseek(int handle, unsigned short offset); // missing
+
+/* finds size of file */
+unsigned short fsize(char *filename); // missing
+
+/* finds size of an open file */
+unsigned short fsizehandle(int handle); // missing
+
+/* returns the value of the file pointer */
+unsigned short ftell(int handle); // missing
+
+/* tests whether end of file has been reached */
+char ftesteof(int handle); // missing
+
 /* displays the file selector (clears the screen first) */
 /* returns NULL if STOP pressed */
 char* selectfile(void);
+
+/* set memory block to be used by findfirst/findnext */
+void setdta(void* buffer); // missing
+
+/* sets file date/time to current date/time */
+char fdatestamp(char* filename); // missing
+
+/* sets the attribute byte for a file open for output */
+char fsetattr(int handlem, char attribute); // missing
+
+/* returns attribute byte of file */
+char fgetattr(char *filename); // missing
+
+/* ascertains whether a 'yellow event' is pending */
+int kmgetyellow(void); // missing
+
+/* sets up a yellow event. Specialised use only. */
+void kmsetyellow(int eventtoken); // missing
 
 /* reads a character from the parallel port using Lapcat protocol */
 char lapcat_receive(char *character);

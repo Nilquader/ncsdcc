@@ -20,7 +20,7 @@ all: card.bin
 snapshot: test.card
 test: test.card
 	cp test.card ~/nc100/nc100.card 
-	$(EMU)
+	$(EMU) -s
 
 clean:
 	rm -f *.ihx

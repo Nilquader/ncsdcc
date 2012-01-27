@@ -13,6 +13,7 @@ int main(void)
    char row, col, row2, col2;
    long int *ticker;
    struct padtime mytime;
+   char seribyte;
 
    eingabe[0] = 0; 
    firmver=padgetversion();
@@ -27,7 +28,14 @@ int main(void)
    printf("Address is: %u\n", (unsigned int)mytime);
    printf("Date: %i.%i. Time is %i:%i:%i\n", mytime.month, mytime.date, mytime.hour, mytime.minute, mytime.second);
 
-   if (padserialwaiting()) printf("Serial data waiting...\n");   
+   while(1) 
+   {
+    while(!padserialwaiting());
+    printf("Serial data waiting...\n");   
+    padinserial(&seribyte);
+    printf("Byte: %02x\n", seribyte);
+    padoutserial(seribyte + 1);
+   }
 
    getchar();
 
